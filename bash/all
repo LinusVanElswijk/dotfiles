@@ -1,0 +1,3 @@
+source "${BASH_SOURCE%/*}/setup_home_bin"
+source "${BASH_SOURCE%/*}/utils"
+

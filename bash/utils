@@ -1,0 +1,32 @@
+# Source a file if it exists.
+try_source() {
+  [ -f "$1" ] && source "$1"
+}
+export -f try_source
+
+# Runs both apt-get update and upgrade.
+# Will prompt for password.
+# $@ Arguments, such as '-y', are forwarded to the upgrade call.
+function upnup { 
+  sudo sh -c "apt-get update && apt-get upgrade $@"
+}
+export -f upnup
+
+# ssh into a tmux session on a remote machine.
+# $1 The hostname or ip of the remote machine.
+# $2 The session name (defaults to 'default_session')
+function ssht {
+  hostname=$1
+  session_name=${2:-default_session}
+
+  ssh -t "$hostname" "tmux new-session -As $session_name"
+}
+export -f ssht
+
+# Same as history but the items in the output are not prefixed with a number.
+# $@ Arguments are forwarded to the call to history.
+function clean_history {
+  history $@ | awk '{$1=""; print substr($0, 2)}'
+}
+export -f clean_history
+
