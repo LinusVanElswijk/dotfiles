@@ -1,0 +1,51 @@
+# ~/.tmux.conf
+
+################################################################################
+# General
+
+# Change the prefix. 
+#unbind C-b
+#set-option -g prefix C-a
+
+# Mouse mode
+set -g mouse on
+
+# Reload this config file
+bind-key r source-file ~/.tmux.conf \; display-message "Reloaded '~/.tmux.conf'."
+
+# Vim style command-prompt
+bind-key : command-prompt
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+################################################################################
+# Panes and Windows
+
+# Windows
+bind-key H previous-window
+bind-key L next-window
+
+# Panes (vim direction keys)
+bind-key h select-pane -L
+bind-key j select-pane -U
+bind-key k select-pane -D
+bind-key l select-pane -R
+
+# Panes (arrow keys)
+bind -n M-Left select-pane -L
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+bind -n M-Right select-pane -R
+
+# Splitting
+bind-key v split-window -v
+bind-key s split-window -h
+
+################################################################################
+# Vi mode (select and yank)
+setw -g mode-keys vi
+
+bind -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
+
