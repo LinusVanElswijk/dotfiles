@@ -9,3 +9,6 @@ source "${SCRIPT_DIR}/config_sync"
 source "${SCRIPT_DIR}/setup_home_bin"
 source "${SCRIPT_DIR}/utils"
 
+# Other modules
+source "${CONFIG_SYNC_DIR}/tmux/environment_variables"
+
