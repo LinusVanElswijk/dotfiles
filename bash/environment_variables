@@ -1,0 +1,4 @@
+# The config sync root directory.
+# See https://stackoverflow.com/a/246128
+export CONFIG_SYNC_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." &> /dev/null && pwd)
+

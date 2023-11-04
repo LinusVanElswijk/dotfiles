@@ -1,0 +1,48 @@
+function config_sync() {
+  [[ -n $CONFIG_SYNC_DIR ]] || {
+    echo "Error: CONFIG_SYNC_DIR has not been set."
+    return 1
+  }
+
+  function update() {(
+    cd $CONFIG_SYNC_DIR &&
+    git fetch &&
+    git pull
+  )}
+
+  function install() {
+    source "${CONFIG_SYNC_DIR}/tmux/install.sh"
+    source "${CONFIG_SYNC_DIR}/vim/install.sh"
+  }
+
+  function upgrade() {
+    update && install
+  }
+
+  function status() {(
+    cd $CONFIG_SYNC_DIR &&
+    git status
+  )}
+
+  case "$1" in
+    "update")
+      update
+      ;;
+    "install")
+      install
+      ;;
+    *)
+    "upgrade")
+      upgrade
+      ;;
+    "status")
+      status
+      ;;
+    *)
+      echo "Invalid option: $1"
+      return 1
+      ;;
+  esac
+}
+export -f config_sync
+
