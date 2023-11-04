@@ -31,7 +31,6 @@ function config_sync() {
     "install")
       install
       ;;
-    *)
     "upgrade")
       upgrade
       ;;
