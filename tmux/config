@@ -50,11 +50,6 @@ bind -T copy-mode-vi v send -X begin-selection
 bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
 
 ################################################################################
-# Status bar
-set -g status-right "#(hostname) -- %b %d %Y %l:%M %p"
-
-
-################################################################################
 # Colors
 set -g default-terminal "xterm-256color"
 
@@ -66,6 +61,34 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
 ################################################################################
 # Plugins
 set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'catppuccin/tmux'
+
+################################################################################
+# Plugin: catppuccin
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W"
+
+
+set -g @catppuccin_status_modules_right "directory user session"
+set -g @catppuccin_status_left_separator  ""
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"
+set -g @catppuccin_status_connect_separator "no"
+ 
+set -g status-right ''
+set -g @catppuccin_user_text "#(whoami)@#h"
+set -g @catppuccin_directory_text "#{pane_current_path}"
+set -g @catppuccin_session_text "#S:#(tmux ls | wc -l)"
+
 
 # Initialize TMUX plugin manager (keep at the very bottom of the config)
 run '$TMUX_PLUGIN_MANAGER_PATH/tpm/tpm'
