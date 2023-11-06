@@ -18,6 +18,7 @@ bind-key : command-prompt
 
 # don't rename windows automatically
 set-option -g allow-rename off
+bind-key R run-shell "tmux new-window -c '~' -n '~/.tmux.conf' vi ~/.tmux.conf"
 
 ################################################################################
 # Panes and Windows
@@ -25,6 +26,7 @@ set-option -g allow-rename off
 # Windows
 bind-key H previous-window
 bind-key L next-window
+bind c new-window -c "#{pane_current_path}"
 
 # Panes (vim direction keys)
 bind-key h select-pane -L
