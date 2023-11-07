@@ -1,5 +1,6 @@
 function dotfu() {
   local command=$1
+  shift
   local command_list=()
 
   # Guard clauses
@@ -29,10 +30,54 @@ function dotfu() {
     echo "bootstrap"
   }
 
+  command_list+=("install")
+  function df_install() {
+    local module=$1
+    local module_dir="${DOTFILES_DIR}/${module}"
+
+    function df_process_item() {
+        local src=$1
+        local relative=$(
+          realpath --relative-to="${DOTFILES_DIR}" "$src"
+        )
+        local dest="${HOME}/${relative/dot_/.}"
+        
+        if [[ -e $dest ]] ; then
+          >&2 echo "Error: aborting because ${dest} already exists."
+          exit 1
+        fi
+
+        if [[ -d $src ]] ; then
+          >&2 echo "add dir: ${dest}"
+          mkdir $dest
+        elif [[ -f $src ]] ; then
+          >&2 echo "linking: ${src} -> ${dest}"
+          ln -s $src $dest
+        fi
+    }
+
+    # Guard clauses
+    if [[ -z $module ]] ; then
+      >&2 echo "Error: no module provided."
+      return 1
+    fi
+    
+    if [[ ! -d "$module_dir" ]] ; then
+      >&2 echo "Error: cannot find '${module_dir}'."
+      return 1
+    fi
+
+    local items=( $(find "${module_dir}" -print) )
+    echo ${items[*]}
+    for i in "${items[@]}" ; do
+      df_process_item $i
+    done
+  }
+
   # Main
   for i in "${command_list[@]}" ; do
     if [[ "$command" == "$i" ]] ; then
-        eval "df_${command}"
+        eval "df_${command} ${@}"
         return 0
     fi
   done
