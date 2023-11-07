@@ -1,0 +1,7 @@
+# The config sync root directory.
+# See https://stackoverflow.com/a/246128
+# 
+# We assume this file is in dir .dotfiles/bash/_dot_config/bash/ and
+# so we go up 3 times to reach .dotfiles/
+export DOTFILES_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../../" &> /dev/null && pwd)
+

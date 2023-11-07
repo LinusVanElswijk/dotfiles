@@ -1,0 +1,13 @@
+if [[ ! -e "${HOME}/bin" ]] ; then
+  mkdir "${HOME}/bin"
+fi
+
+if [[ -e "${HOME}/.config/bash/environment_variables" ]] ; then
+  source "${HOME}/.config/bash/environment_variables"
+fi
+
+# Put things that are specific to this machine in the following file
+if [[ -e "${HOME}/.config/bash/local" ]] ; then
+  source "${HOME}/.config/bash/local"
+fi
+

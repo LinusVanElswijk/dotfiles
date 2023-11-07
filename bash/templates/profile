@@ -1,7 +1,0 @@
-try_source() {
-  [ -f "$1" ] && source "$1"
-}
-
-try_source "$HOME/.bashrc"
-try_source "$HOME/.config_sync/bash/all"
-

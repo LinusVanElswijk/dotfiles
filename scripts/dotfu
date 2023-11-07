@@ -38,20 +38,20 @@ function dotfu() {
     function df_process_item() {
         local src=$1
         local relative=$(
-          realpath --relative-to="${DOTFILES_DIR}" "$src"
+          realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}"
         )
         local dest="${HOME}/${relative/dot_/.}"
         
-        if [[ -e $dest ]] ; then
-          >&2 echo "Error: aborting because ${dest} already exists."
-          exit 1
-        fi
-
-        if [[ -d $src ]] ; then
-          >&2 echo "add dir: ${dest}"
+        if [[ -d $src && ! -e $dest ]] ; then
+          >&2 echo "create : ${dest}"
           mkdir $dest
         elif [[ -f $src ]] ; then
-          >&2 echo "linking: ${src} -> ${dest}"
+          if [[ -e ${dest} ]]; then
+              >&2 echo "remove : ${dest}"
+              rm ${dest}
+          fi
+
+          >&2 echo "link   : ${dest} -> ${src}"
           ln -s $src $dest
         fi
     }
@@ -86,5 +86,6 @@ function dotfu() {
   echo "Commands: ${command_list[*]}"
   return 1
 }
-dotfu
+
+dotfu $@
 
