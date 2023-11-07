@@ -3,15 +3,20 @@ if [[ ! -e "${HOME}/bin" ]] ; then
 fi
 
 # Load the dotfu variables first.
+# Note: this does not have the .dotfu prefix so it will not get loaded again in the next step.
 if [[ -e "${HOME}/.config/dotfu/environment_variables" ]] ; then
   source "${HOME}/.config/dotfu/environment_variables"
 fi
 
-if [[ -e "${HOME}/.config/bash/environment_variables" ]] ; then
-  source "${HOME}/.config/bash/environment_variables"
-fi
+# Load the environment variables of all installed modules.
+env_var_file_list=( $(find "${HOME}/.config" -name environment_variables.dotfu -print) )
+for file in ${env_var_file_list[@]} ; do
+  source "${file}"
+done
 
 # Put things that are specific to this machine in the following file:
 if [[ -e "${HOME}/.config/bash/local" ]] ; then
   source "${HOME}/.config/bash/local"
 fi
+
+export PATH="${HOME}/bin/:${PATH}"
