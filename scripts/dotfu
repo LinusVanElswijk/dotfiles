@@ -1,0 +1,56 @@
+function dotfu() {
+  local command=$1
+  
+  # Guard clauses
+  if [[ -n command ]] ; then
+    >&2 echo "Error: no command provided."
+    return 1
+  fi
+
+  if [[ -n $DOTFILES_DIR ]] && [[ $command != "bootstrap" ]];
+    >&2 echo "Error: environment variable DOTFILES_DIR has not been set."
+    return 1
+  fi
+
+  function update() {(
+    cd $DOTFILES_DIR &&
+    git fetch &&
+    git pull
+  )}
+
+  function install() {
+    source "${DOTFILES_DIR}/tmux/install.sh"
+    source "${DOTFILES_DIR}/nvim/install.sh"
+    source "${DOTFILES_DIR}/vim/install.sh"
+  }
+
+  function upgrade() {
+    update && install
+  }
+
+  function status() {(
+    cd $DOTFILES_DIR &&
+    git status
+  )}
+
+  case "$1" in
+    "update")
+      update
+      ;;
+    "install")
+      install
+      ;;
+    "upgrade")
+      upgrade
+      ;;
+    "status")
+      status
+      ;;
+    *)
+      echo "Invalid option: $1"
+      return 1
+      ;;
+  esac
+}
+export -f config_sync
+

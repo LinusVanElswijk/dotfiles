@@ -5,7 +5,6 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 # This needs to be sourced first, so other scripts can use the variables.
 source "${SCRIPT_DIR}/environment_variables"
 
-source "${SCRIPT_DIR}/config_sync"
 source "${SCRIPT_DIR}/setup_home_bin"
 source "${SCRIPT_DIR}/utils"
 
