@@ -1,56 +1,45 @@
 function dotfu() {
   local command=$1
-  
+  local command_list=()
+
   # Guard clauses
-  if [[ -n command ]] ; then
+  if [[ -z $command ]] ; then
     >&2 echo "Error: no command provided."
     return 1
   fi
 
-  if [[ -n $DOTFILES_DIR ]] && [[ $command != "bootstrap" ]];
+  if [[ -z $DOTFILES_DIR ]] && [[ $command != "bootstrap" ]] ; then
     >&2 echo "Error: environment variable DOTFILES_DIR has not been set."
     return 1
   fi
 
-  function update() {(
-    cd $DOTFILES_DIR &&
-    git fetch &&
-    git pull
-  )}
-
-  function install() {
-    source "${DOTFILES_DIR}/tmux/install.sh"
-    source "${DOTFILES_DIR}/nvim/install.sh"
-    source "${DOTFILES_DIR}/vim/install.sh"
+  # Commands
+  command_list+="cd"
+  function df_cd() {
+    cd $DOTFILES_DIR
+  }
+  
+  command_list+=("status")
+  function df_status() {
+    (cd $DOTFILES_DIR && git status)
+  }
+   
+  command_list+=("bootstrap")
+  function df_bootstrap() {
+    echo "bootstrap"
   }
 
-  function upgrade() {
-    update && install
-  }
+  # Main
+  for i in "${command_list[@]}" ; do
+    if [[ "$command" == "$i" ]] ; then
+        eval "df_${command}"
+        return 0
+    fi
+  done
 
-  function status() {(
-    cd $DOTFILES_DIR &&
-    git status
-  )}
-
-  case "$1" in
-    "update")
-      update
-      ;;
-    "install")
-      install
-      ;;
-    "upgrade")
-      upgrade
-      ;;
-    "status")
-      status
-      ;;
-    *)
-      echo "Invalid option: $1"
-      return 1
-      ;;
-  esac
+  echo "Error: not a valid command."
+  echo "Commands: ${command_list[*]}"
+  return 1
 }
-export -f config_sync
+dotfu
 
