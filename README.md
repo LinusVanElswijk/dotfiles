@@ -1,10 +1,10 @@
-# config_sync
+# dotfiles
 Repository to contain my personal config files for various applications.
 
 Use the following command to bootstrap the initialization, when there is no `~/.bash_profile` yet:
 ```
-git clone git@github.com:LinusVanElswijk/config_sync.git ~/.config_sync &&\
-cp ~/.config_sync/bash/templates/profile ~/.bash_profile &&\
+git clone git@github.com:LinusVanElswijk/dotfiles.git ~/.dotfiles &&\
+cp ~/.dotfiles/bash/templates/profile ~/.bash_profile &&\
 source ~/.bash_profile
 ```
 
