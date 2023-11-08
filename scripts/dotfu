@@ -1,10 +1,13 @@
+#!/bin/bash
+
 function dotfu() {
   # Local vars
   local command=$1
   shift
-  
+
   local install_dir=${DOTFILES_INSTALL_DIR:-~}
-  local command_list=()  
+  local command_list=()
+  local is_dryrun=false
 
   # Guard clauses
   if [[ -z $command ]] ; then
@@ -15,7 +18,7 @@ function dotfu() {
   if [[ -z $DOTFILES_DIR ]] && [[ $command != "bootstrap" ]] ; then
     >&2 echo "Error: environment variable DOTFILES_DIR has not been set."
     return 1
-  fi  
+  fi
 
   # Local functions
   function translate_path() {
@@ -26,20 +29,40 @@ function dotfu() {
     sed 's|^__|_|'
   }
 
+  function extension() {
+    echo "${1##*.}"
+  }
+
+  function filename() {
+    local base=$(basename -- $1)
+    echo "${base}"
+  }
+
+  function run_command() {
+    local command=$1
+    shift
+
+    for i in "${command_list[@]}" ; do
+      if [[ "$command" == "$i" ]] ; then
+        eval "df_${command} ${@}"
+        return 0
+      fi
+    done
+
+    echo "Error: ${command} is not a valid command."
+    echo "Commands: ${command_list[*]}"
+    return 1
+  }
+
   # Commands
   command_list+=("cd")
   function df_cd() {
     cd $DOTFILES_DIR
   }
-  
+
   command_list+=("status")
   function df_status() {
     (cd $DOTFILES_DIR && git status)
-  }
-   
-  command_list+=("bootstrap")
-  function df_bootstrap() {
-    echo "bootstrap"
   }
 
   command_list+=("translate")
@@ -51,8 +74,8 @@ function dotfu() {
   function df_install() {
     ## Local vars
     local module=$1
-    shift    
-    
+    shift
+
     local module_dir="${DOTFILES_DIR}/${module}"
 
     ## Guard clauses
@@ -67,52 +90,69 @@ function dotfu() {
     fi
 
     ## Local functions
+    function is_post_install_item() {
+      local name=$(filename $1)
+      [[ "$name" == "post_install.dotfu" ]]
+    }
+
+    function is_dotfu_item() {
+      local ext=$(extension $1)
+      [[ "$ext" == "dotfu" ]]
+    }
+
     function src_to_dest() {
       local src=$1
       local rel_src=$(
-        realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}" 
+        realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}"
       )
       local rel_dest=$(translate_path $rel_src)
       echo "${install_dir}/${rel_dest}"
     }
-    
+
     function process_item() {
       local src=$1
       local dest=$(src_to_dest $src)
-      
+
       if [[ -d $src && ! -e $dest ]] ; then
         >&2 echo "create : ${dest}"
-        mkdir $dest
+        [[ "$is_dryrun" == false ]] && mkdir $dest
       elif [[ -f $src ]] ; then
-        if [[ -e ${dest} ]] || [[ -L ${dest} ]]; then
+        if [[ -e ${dest} ]] || [[ -L ${dest} ]] ; then
           >&2 echo "remove : ${dest}"
-          rm ${dest}
+          [[ "$is_dryrun" == false ]] && rm ${dest}
         fi
 
         >&2 echo "link   : ${dest} -> ${src}"
-        ln -s $src $dest
+        [[ $"is_dryrun" == false ]] && ln -s $src $dest
       fi
     }
- 
-    ## Main 
-    >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir})'"
+
+    ## Main
+    >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir}')"
     local items=( $(find "${module_dir}" -print) )
     for i in "${items[@]}" ; do
-      process_item $i
+      if ! is_dotfu_item $i ; then
+        process_item $i
+      fi
+    done
+
+    for i in "${items[@]}" ; do
+      if is_post_install_item $i ; then
+        local work_dir=$(dirname $(src_to_dest $i))
+        >&2 echo "sourcing ${i} (with pwd=${work_dir})."
+        [[ "$is_dryrun" == false ]] && (cd $work_dir && source $i)
+      fi
     done
   }
 
-  # Main
-  for i in "${command_list[@]}" ; do
-    if [[ "$command" == "$i" ]] ; then
-        eval "df_${command} ${@}"
-        return 0
-    fi
-  done
+  command_list+=("dryrun")
+  function df_dryrun() {
+    is_dryrun=true
+    run_command $@
+  }
 
-  echo "Error: not a valid command."
-  echo "Commands: ${command_list[*]}"
-  return 1
+  # Main
+  run_command $command $@
 }
 
 dotfu $@
