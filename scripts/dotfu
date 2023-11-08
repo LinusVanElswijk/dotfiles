@@ -1,7 +1,10 @@
 function dotfu() {
+  # Local vars
   local command=$1
   shift
-  local command_list=()
+  
+  local install_dir=${DOTFILES_INSTALL_DIR:-~}
+  local command_list=()  
 
   # Guard clauses
   if [[ -z $command ]] ; then
@@ -12,10 +15,19 @@ function dotfu() {
   if [[ -z $DOTFILES_DIR ]] && [[ $command != "bootstrap" ]] ; then
     >&2 echo "Error: environment variable DOTFILES_DIR has not been set."
     return 1
-  fi
+  fi  
+
+  # Local functions
+  function translate_path() {
+    echo $1                    |
+    sed -r 's|/_([^_])|/.\1|g' |
+    sed -r 's|^_([^_])|.\1|'   |
+    sed 's|/__|/_|g'           |
+    sed 's|^__|_|'
+  }
 
   # Commands
-  command_list+="cd"
+  command_list+=("cd")
   function df_cd() {
     cd $DOTFILES_DIR
   }
@@ -30,47 +42,63 @@ function dotfu() {
     echo "bootstrap"
   }
 
+  command_list+=("translate")
+  function df_translate() {
+    translate_path $1
+  }
+
   command_list+=("install")
   function df_install() {
+    ## Local vars
     local module=$1
+    shift    
+    
     local module_dir="${DOTFILES_DIR}/${module}"
 
-    function df_process_item() {
-        local src=$1
-        local relative=$(
-          realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}"
-        )
-        local dest="${HOME}/${relative/dot_/.}"
-        
-        if [[ -d $src && ! -e $dest ]] ; then
-          >&2 echo "create : ${dest}"
-          mkdir $dest
-        elif [[ -f $src ]] ; then
-          if [[ -e ${dest} ]]; then
-              >&2 echo "remove : ${dest}"
-              rm ${dest}
-          fi
-
-          >&2 echo "link   : ${dest} -> ${src}"
-          ln -s $src $dest
-        fi
-    }
-
-    # Guard clauses
+    ## Guard clauses
     if [[ -z $module ]] ; then
       >&2 echo "Error: no module provided."
       return 1
     fi
-    
+
     if [[ ! -d "$module_dir" ]] ; then
       >&2 echo "Error: cannot find '${module_dir}'."
       return 1
     fi
 
+    ## Local functions
+    function src_to_dest() {
+      local src=$1
+      local rel_src=$(
+        realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}" 
+      )
+      local rel_dest=$(translate_path $rel_src)
+      echo "${install_dir}/${rel_dest}"
+    }
+    
+    function process_item() {
+      local src=$1
+      local dest=$(src_to_dest $src)
+      
+      if [[ -d $src && ! -e $dest ]] ; then
+        >&2 echo "create : ${dest}"
+        mkdir $dest
+      elif [[ -f $src ]] ; then
+        if [[ -e ${dest} ]] || [[ -L ${dest} ]]; then
+          >&2 echo "remove : ${dest}"
+          rm ${dest}
+        fi
+
+        >&2 echo "link   : ${dest} -> ${src}"
+        ln -s $src $dest
+      fi
+    }
+ 
+    ## Main 
+    >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir})'"
     local items=( $(find "${module_dir}" -print) )
-    echo ${items[*]}
     for i in "${items[@]}" ; do
-      df_process_item $i
+      process_item $i
     done
   }
 
@@ -88,4 +116,3 @@ function dotfu() {
 }
 
 dotfu $@
-

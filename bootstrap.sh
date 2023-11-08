@@ -7,7 +7,11 @@ export DOTFILES_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && 
 dotfu_conf_dir="${HOME}/.config/dotfu"
 echo "Generating dotfu config in ${dotfu_conf_dir}."
 mkdir -p $dotfu_conf_dir
-echo "export DOTFILES_DIR=${DOTFILES_DIR}" > "${dotfu_conf_dir}/environment_variables"
+
+env_var_file="${dotfu_conf_dir}/environment_variables"
+touch env_var_file
+echo "export DOTFILES_DIR=${DOTFILES_DIR}" >> $env_var_file
+echo "export DOTFILES_INSTALL_DIR=${DOTFILES_INSTALL_DIR:-~}" >> $env_var_file
 
 echo "Running 'dotfu install bash'..."
 "${DOTFILES_DIR}"/scripts/dotfu install bash
