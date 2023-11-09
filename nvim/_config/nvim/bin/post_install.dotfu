@@ -2,6 +2,14 @@
 
 function install_nvim() {
   >&2 echo "Installing nvim."
+
+  echo "Removing local data from previous installation."
+  local -r local_data="/home/linus/.local/share/nvim"
+  [[ -e ${local_data} ]] && rm -rf ${local_data}
+
+  rm -rf ~/.local/share/nvim/site/pack
+  rm -rf ~/.local/share/nvim/site/pack
+
   local -r dest="./nvim-linux64"
   local -r url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
   local -r tmp_dir="/tmp/nvim_install_$(date +%s)"
