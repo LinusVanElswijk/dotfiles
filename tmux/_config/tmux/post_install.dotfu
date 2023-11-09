@@ -1,0 +1,40 @@
+#!/bin/bash
+
+function download_tpm() {
+  >&2 echo "Installing tmux plugin manager."
+  local dest="plugins/tpm"
+
+  mkdir -p $dest
+  if [[ -e $dest ]] ; then
+    rm -rf $dest
+  fi
+
+  git clone https://github.com/tmux-plugins/tpm \
+    $dest \
+    --branch v3.1.0 \
+    --single-branch \
+    -c advice.detachedHead=false
+}
+download_tpm
+
+function install_gitmux() {
+  >&2 echo "Installing gitmux."
+  local dest="bin/"
+  local url="https://github.com/arl/gitmux/releases/download/v0.10.3/gitmux_v0.10.3_linux_amd64.tar.gz"
+  local tmp_dir="/tmp/gitmux_install_$(date +%s)"
+
+  mkdir -p $tmp_dir
+  ( cd $tmp_dir
+    wget $url -O gitmux.tar.gz
+    tar -xzf gitmux.tar.gz
+    chmod +x gitmux
+  )
+
+  mkdir -p $dest
+  if [[ -e "${dest}/gitmux" ]] ; then
+    rm -rf "${dest}/gitmux"
+  fi
+  mv "${tmp_dir}/gitmux" $dest
+  rm -rf $tmp_dir
+}
+install_gitmux

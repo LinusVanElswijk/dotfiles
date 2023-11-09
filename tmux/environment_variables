@@ -1,2 +1,0 @@
-export TMUX_PLUGIN_MANAGER_PATH="${CONFIG_SYNC_DIR}/data/tmux/plugins"
-
