@@ -1,0 +1,23 @@
+#!/bin/bash
+
+function cdf() {
+  local -r target=$1
+  
+  local current_dir=$(pwd)
+  while [[ "$current_dir" != "/" ]]
+  do
+    local parent=$(dirname $current_dir)
+    local parent_base=$(basename $parent)
+
+    if [[ $parent_base = $target* ]] ; then
+      cd $parent
+      return 0
+    fi
+    
+    current_dir=$parent
+  done
+  
+  >&2 echo "Error: No parent directory matching '${target}*' in current path."
+  return 1
+}
+cdf $@

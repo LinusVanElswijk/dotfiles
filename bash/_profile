@@ -9,7 +9,7 @@ if [[ -e "${HOME}/.config/dotfu/environment_variables" ]] ; then
 fi
 
 # Load the environment variables of all installed modules.
-env_var_file_list=( $(find "${HOME}/.config" -name environment_variables.dotfu -print) )
+env_var_file_list=( $(find "${HOME}/.config" -name environment_variables -print) )
 for file in ${env_var_file_list[@]} ; do
   source "${file}"
 done

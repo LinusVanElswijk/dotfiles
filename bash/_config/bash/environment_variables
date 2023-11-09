@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export PATH=~/.config/bash/scripts:$PATH
