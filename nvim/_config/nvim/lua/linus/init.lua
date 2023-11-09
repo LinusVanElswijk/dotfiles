@@ -1,6 +1,6 @@
+require("linus.set")  -- must set leader before loading nvim
 require("linus.lazy")
 
---require("linus_codes.set")
---require("linus_codes.remap")
---require("linus_codes.colors")
+--require("linus.remap")
+--require("linus.colors")
 
