@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export PATH=~/.config/nvim/bin:$PATH

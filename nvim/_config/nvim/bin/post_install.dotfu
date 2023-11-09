@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function install_nvim() {
+  >&2 echo "Installing nvim."
+  local -r dest="./nvim-linux64"
+  local -r url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+  local -r tmp_dir="/tmp/nvim_install_$(date +%s)"
+
+  [[ -e ${dest} ]] && rm -rf ${dest}
+  mkdir -p ${dest}
+
+  mkdir -p $tmp_dir
+  ( cd $tmp_dir
+    wget $url -O nvim.tar.gz
+    tar -xzf nvim.tar.gz
+  )
+  mv "${tmp_dir}/nvim-linux64" "${dest}/.."
+  rm -rf $tmp_dir
+
+  ln -sf "${dest}/bin/nvim" "${dest}/../nvim"
+  ln -sf "${dest}/bin/nvim" "${dest}/../nv"
+}
+install_nvim
+
