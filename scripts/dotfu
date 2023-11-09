@@ -2,10 +2,10 @@
 
 function dotfu() {
   # Local vars
-  local command=$1
+  local -r command=$1
   shift
 
-  local install_dir=${DOTFILES_INSTALL_DIR:-~}
+  local -r install_dir=${DOTFILES_INSTALL_DIR:-~}
   local command_list=()
   local is_dryrun=false
 
@@ -34,12 +34,12 @@ function dotfu() {
   }
 
   function filename() {
-    local base=$(basename -- $1)
+    local -r base=$(basename -- $1)
     echo "${base}"
   }
 
   function run_command() {
-    local command=$1
+    local -r command=$1
     shift
 
     for i in "${command_list[@]}" ; do
@@ -73,10 +73,10 @@ function dotfu() {
   command_list+=("install")
   function df_install() {
     ## Local vars
-    local module=$1
+    local -r module=$1
     shift
 
-    local module_dir="${DOTFILES_DIR}/${module}"
+    local -r module_dir="${DOTFILES_DIR}/${module}"
 
     ## Guard clauses
     if [[ -z $module ]] ; then
@@ -91,49 +91,77 @@ function dotfu() {
 
     ## Local functions
     function is_post_install_item() {
-      local name=$(filename $1)
+      local -r name=$(filename $1)
       [[ "$name" == "post_install.dotfu" ]]
     }
 
     function is_dotfu_item() {
-      local ext=$(extension $1)
+      local -r ext=$(extension $1)
       [[ "$ext" == "dotfu" ]]
     }
 
     function src_to_dest() {
-      local src=$1
-      local rel_src=$(
-        realpath --relative-to="${DOTFILES_DIR}/${module}" "${src}"
-      )
-      local rel_dest=$(translate_path $rel_src)
+      local -r src=$1
+      local -r rel_src=${src#"${module_dir}/"}
+      local -r rel_dest=$(translate_path $rel_src)
       echo "${install_dir}/${rel_dest}"
     }
 
     function process_item() {
-      local src=$1
-      local dest=$(src_to_dest $src)
+      local -r src=$1
+      local -r dest=$(src_to_dest $src)
 
-      if [[ -d $src && ! -e $dest ]] ; then
+      function remove_existing() {
+        if [[ -e $1 || -L $1 ]] ; then
+          >&2 echo "remove : ${1}"
+          [[ "$is_dryrun" == false ]] && rm -rf $1
+        fi
+      }
+
+      function install_file() {
+        remove_existing $dest
+        >&2 echo "link   : ${dest} -> ${src}"
+        [[ "$is_dryrun" == false ]] && ln -s $src $dest
+      }
+
+      function install_dir() {
+        [[ -d $dest ]] && return 0
+
+        remove_existing $dest
         >&2 echo "create : ${dest}"
         [[ "$is_dryrun" == false ]] && mkdir $dest
-      elif [[ -f $src ]] ; then
-        if [[ -e ${dest} ]] || [[ -L ${dest} ]] ; then
-          >&2 echo "remove : ${dest}"
-          [[ "$is_dryrun" == false ]] && rm ${dest}
+      }
+
+      function install_symlink() {
+        local -r target_in_dotfiles_dir=$(readlink $src)
+        if [[ "$target_in_dotfiles_dir" =~ ^/ ]] ; then
+          >&2 echo "Error: ${src} is a link with an absolute pad ${target_in_dotfiles_dir}, which is not supported. Skipping."
+          return 1
         fi
 
-        >&2 echo "link   : ${dest} -> ${src}"
-        [[ $"is_dryrun" == false ]] && ln -s $src $dest
+        local -r target_in_install_dir=$(translate_path $target_in_dotfiles_dir)
+        [[ -d $src && -d $dest ]] || remove_existing $dest
+        >&2 echo "link   : ${dest} -> ${target_in_install_dir}"
+        [[ "$is_dryrun" == false ]] && ln -s $target_in_install_dir $dest
+      }
+
+      # Test for links needs to happen first.
+      if [[ -L $src ]] ; then
+        install_symlink
+      elif [[ -d $src ]] ; then
+        install_dir
+      elif [[ -f $src ]] ; then
+        install_file
       fi
     }
 
     ## Main
     >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir}')"
-    local items=( $(find "${module_dir}" -print) )
+    local -r items=( $(find "${module_dir}" -print) )
     for i in "${items[@]}" ; do
-      if ! is_dotfu_item $i ; then
-        process_item $i
-      fi
+      [[ ${i} == "${module_dir}" ]] && continue
+      is_dotfu_item $i && continue
+      process_item $i
     done
 
     for i in "${items[@]}" ; do
