@@ -24,8 +24,9 @@ function install_gitmux() {
   local tmp_dir="/tmp/gitmux_install_$(date +%s)"
 
   mkdir -p $tmp_dir
+  trap "rm -rf $tmp_dir" EXIT
   ( cd $tmp_dir
-    wget $url -O gitmux.tar.gz
+    wget -q --show-progress $url -O gitmux.tar.gz
     tar -xzf gitmux.tar.gz
     chmod +x gitmux
   )
@@ -35,6 +36,5 @@ function install_gitmux() {
     rm -rf "${dest}/gitmux"
   fi
   mv "${tmp_dir}/gitmux" $dest
-  rm -rf $tmp_dir
 }
 install_gitmux

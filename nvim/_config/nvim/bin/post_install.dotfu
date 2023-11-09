@@ -10,15 +10,14 @@ function install_nvim() {
   mkdir -p ${dest}
 
   mkdir -p $tmp_dir
+  trap "rm -rf $tmp_dir" EXIT
   ( cd $tmp_dir
-    wget $url -O nvim.tar.gz
+    wget -q --show-progress $url -O nvim.tar.gz
     tar -xzf nvim.tar.gz
   )
   mv "${tmp_dir}/nvim-linux64" "${dest}/.."
-  rm -rf $tmp_dir
 
   ln -sf "${dest}/bin/nvim" "${dest}/../nvim"
   ln -sf "${dest}/bin/nvim" "${dest}/../nv"
 }
 install_nvim
-
