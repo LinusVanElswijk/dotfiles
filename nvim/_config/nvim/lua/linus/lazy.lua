@@ -11,18 +11,4 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  -- colorscheme/theme
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin"
-    end
-  },
-  { "vim-airline/vim-airline", name = "vim-airline" },
-  { "vim-airline/vim-airline-themes", name = "vim-airline-themes",
-    config = function()
-      vim.g.airline_theme="tomorrow"
-    end  
-  }
-})
-
+require("lazy").setup("linus.plugins")
