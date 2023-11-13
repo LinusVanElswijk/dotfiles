@@ -73,19 +73,11 @@ function dotfu() {
   command_list+=("install")
   function df_install() {
     ## Local vars
-    local -r module=$1
-    shift
-
-    local -r module_dir="${DOTFILES_DIR}/${module}"
-
+    local -r module_list=($@)
+    
     ## Guard clauses
-    if [[ -z $module ]] ; then
+    if [[ -z $module_list ]] ; then
       >&2 echo "Error: no module provided."
-      return 1
-    fi
-
-    if [[ ! -d "$module_dir" ]] ; then
-      >&2 echo "Error: cannot find '${module_dir}'."
       return 1
     fi
 
@@ -155,23 +147,37 @@ function dotfu() {
       fi
     }
 
-    ## Main
-    >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir}')"
-    local -r items=( $(find "${module_dir}" -print) )
-    for i in "${items[@]}" ; do
-      [[ ${i} == "${module_dir}" ]] && continue
-      is_dotfu_item $i && continue
-      process_item $i
-    done
+    function install_single_module() {
+      local -r module=$1
+      local -r module_dir="${DOTFILES_DIR}/${module}"
 
-    for i in "${items[@]}" ; do
-      if is_post_install_item $i ; then
-        local work_dir=$(dirname $(src_to_dest $i))
-        >&2 echo "sourcing ${i} (with pwd=${work_dir})."
-        [[ "$is_dryrun" == false ]] && (cd $work_dir && source $i)
+      if [[ ! -d "$module_dir" ]] ; then
+        >&2 echo "Error: cannot find '${module_dir}'."
+        return 1
       fi
+
+      >&2 echo "Installing ${module} (using DOTFILE_INSTALL_DIR='${install_dir}')"
+      local -r items=( $(find "${module_dir}" -print) )
+      for i in "${items[@]}" ; do
+        [[ ${i} == "${module_dir}" ]] && continue
+        is_dotfu_item $i && continue
+        process_item $i
+      done
+
+      for i in "${items[@]}" ; do
+        if is_post_install_item $i ; then
+          local work_dir=$(dirname $(src_to_dest $i))
+          >&2 echo "sourcing ${i} (with pwd=${work_dir})."
+          [[ "$is_dryrun" == false ]] && (cd $work_dir && source $i)
+        fi
+      done
+    }
+
+    ## Main
+    for module in "${module_list[@]}" ; do
+      install_single_module $module
     done
-  }
+ }
 
   command_list+=("dryrun")
   function df_dryrun() {
