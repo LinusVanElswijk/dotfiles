@@ -1,48 +1,48 @@
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+OS_PRETTY_NAME=$(
+  cat /etc/os-release | awk -F '=' '/PRETTY_NAME/ {print $2}' | sed 's/"//g'
+)
 
-if [ -n "$force_color_prompt" ]; then
+custom_command_prompt() {
+  local -r color_prompt=$(
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	    # We have color support; assume it's compliant with Ecma-48
-	    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	    # a case would tend to support setf rather than setaf.)
-	    color_prompt=yes
+      echo yes
     else
-	    color_prompt=
+      echo no
     fi
-fi
+  )
 
-in_green() {
-  if [ "$color_prompt" = yes ]; then
-    echo "\[\033[01;32m\]${1}\[\033[00m\]"
-  else
-    echo $1
+  local -r title_is_supported=$(
+    case "$TERM" in
+    xterm*|rxvt*)
+        echo yes;;
+    *)
+        echo no;;
+    esac
+  )
+
+  in_green() {
+    if [ "$color_prompt" = yes ]; then
+      echo "\[\033[01;32m\]${1}\[\033[00m\]"
+    else
+      echo $1
+    fi
+  }
+
+  in_blue() {
+    if [ "$color_prompt" = yes ]; then
+      echo "\[\033[01;34m\]${1}\[\033[00m\]"
+    else
+      echo $1
+    fi
+  }
+
+  PS1="$(in_green '\u@\h'):$(in_green '\w')"
+  if [ "$title_is_supported" = yes ]; then
+    PS1="\[\e]0;${OS_PRETTY_NAME}\]$PS1"
   fi
+
+  PS1="\n$(in_blue '╭─╸\t╶─╴')${PS1}\n"
+  PS1+="$(in_blue '╰╴\$ ')"
+  PS2="$(in_blue '╰╴> ')"
 }
-
-in_blue() {
-  if [ "$color_prompt" = yes ]; then
-    echo "\[\033[01;34m\]${1}\[\033[00m\]"
-  else
-    echo $1
-  fi
-}
-
-PS1="${debian_chroot:+($debian_chroot)}$(in_green '\u@\h'):$(in_blue '\w')\n"
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-PS1="$(in_blue '╭━╸\t╶━╸')${PS1}"
-PS1+="$(in_blue '╰╴\$ ')"
-PS2="$(in_blue '╰╴> ')"
-
-unset color_prompt force_color_prompt
+PROMPT_COMMAND=custom_command_prompt
