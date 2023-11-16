@@ -1,6 +1,7 @@
-OS_PRETTY_NAME=$(
-  cat /etc/os-release | awk -F '=' '/PRETTY_NAME/ {print $2}' | sed 's/"//g'
-)
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
 
 custom_command_prompt() {
   local -r color_prompt=$(
@@ -45,4 +46,7 @@ custom_command_prompt() {
   PS1+="$(in_blue '╰╴\$ ')"
   PS2="$(in_blue '╰╴> ')"
 }
+
 PROMPT_COMMAND=custom_command_prompt
+
+unset color_prompt
