@@ -1,0 +1,23 @@
+#!/bin/bash
+
+( 
+  export NVM_DIR="${HOME}/.config/nvm"
+  export PROFILE=/dev/null  # disable profile changes
+
+  if [ -e "${NVM_DIR}" ]; then
+    echo "Error ${NVM_DIR} already exists." 
+    exit 1
+  fi
+  mkdir $NVM_DIR
+  
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+
+  env_var_file="${NVM_DIR}/environment_variables"
+  echo "export NVM_DIR=${NVM_DIR}" > $env_var_file
+  echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $env_var_file
+  echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> $env_var_file
+)
+
+source "${HOME}/.config/nvm/environment_variables"
+nvm install node  # Install npm by default
+
