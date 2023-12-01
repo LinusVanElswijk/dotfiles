@@ -33,6 +33,7 @@ return({
       local cmp_action = lsp_zero.cmp_action()
 
       cmp.setup({
+        completion = { completeopt = 'menu,menuone,noinsert' },
         formatting = lsp_zero.cmp_format(),
         mapping = cmp.mapping.preset.insert({
           ['<C-Space>'] = cmp.mapping.complete(),
@@ -40,6 +41,13 @@ return({
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
           ['<C-f>'] = cmp_action.luasnip_jump_forward(),
           ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+          ['<CR>'] = cmp.mapping(
+            cmp.mapping.confirm({
+              select = true,
+              behavior = cmp.ConfirmBehavior.Insert
+            }),
+            { 'i', 'c' }
+          ),
         })
       })
     end
@@ -59,7 +67,7 @@ return({
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
 
-      lsp_zero.on_attach(function(client, bufnr)
+      lsp_zero.on_attach(function(_, bufnr)
         -- see :help lsp-zero-keybindings
         -- to learn the available actions
         lsp_zero.default_keymaps({buffer = bufnr})
