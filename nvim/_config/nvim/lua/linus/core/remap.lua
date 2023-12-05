@@ -19,3 +19,4 @@ vim.keymap.set("c", esc_sequence, "<c-c>")  -- avoid weirdness with esc
 local screen_prefix = "<c-w>"
 vim.keymap.set(nvic, screen_prefix .. "s", ":sp <cr>")
 vim.keymap.set(nvic, screen_prefix .. "v", ":vs <cr>")
+vim.keymap.set(nvic, screen_prefix .. "x", ":q <cr>")
