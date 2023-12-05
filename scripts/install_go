@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function install_go() {
+  >&2 echo "Installing go."
+  local dest="${HOME}/bin"
+  local url="https://go.dev/dl/go1.21.4.linux-amd64.tar.gz"
+  local tmp_dir="/tmp/go_install_$(date +%s)"
+
+  mkdir -p $tmp_dir
+  trap "rm -rf $tmp_dir" EXIT
+  ( cd $tmp_dir
+    wget -q --show-progress $url -O go.tar.gz
+    tar -xzf go.tar.gz
+  ) 
+
+  mkdir -p $dest
+  if [[ -e "${dest}/go" ]] ; then
+    rm -rf "${dest}/go"
+  fi
+  mv "${tmp_dir}/go" $dest
+}
+install_go
