@@ -11,6 +11,7 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 -- line wrapping
@@ -25,6 +26,9 @@ vim.opt.undofile = true
 -- search highlighting
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- misc
 vim.opt.scrolloff = 12
