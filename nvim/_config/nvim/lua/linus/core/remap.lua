@@ -34,3 +34,9 @@ local screen_prefix = "<c-w>"
 vim.keymap.set(nvic, screen_prefix .. "s", ":sp <cr>")
 vim.keymap.set(nvic, screen_prefix .. "v", ":vs <cr>")
 vim.keymap.set(nvic, screen_prefix .. "x", ":q <cr>")
+
+-- aligning
+vim.keymap.set("n", "<Leader>a.", "hv0yI<space><esc>v0pv0r<space>_")
+vim.keymap.set("n", "<Leader>aj", "hv0yjI<space><esc>v0pv0r<space>_")
+vim.keymap.set("n", "<Leader>ak", "hv0ykI<space><esc>v0pv0r<space>_")
+vim.keymap.set("n", "<Leader>aa", "hv0yjI<space><esc>v0pv0r<space>_")
