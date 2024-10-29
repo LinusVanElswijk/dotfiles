@@ -1,0 +1,35 @@
+---
+- name: Machine setup
+  hosts: localhost
+  become: true
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Get my user
+      ansible.builtin.set_fact:
+        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+    - name: Essential packages are present
+      ansible.builtin.package:
+        name:
+          - build-essential
+          - curl
+          - gcc
+          - git
+        state: present
+
+    - name: Brew is present
+      ansible.builtin.command:
+        cmd: brew --version
+      register: brew_is_present
+      ignore_errors: true
+      changed_when: false
+
+    - name: Install brew
+      shell: >
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        && echo >> "${HOME}/.profile"
+        && echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "${HOME}/.profile"
+        && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      when: brew_is_present is failed
