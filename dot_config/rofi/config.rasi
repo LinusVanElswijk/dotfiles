@@ -7,6 +7,7 @@ configuration{
     drun-display-format: "{icon} {name}";
     location: 0;
     matching: "fuzzy";
+    sort: true;
     disable-history: true;
     hide-scrollbar: true;
     display-combi: " 󱞰 Jump";
@@ -17,5 +18,5 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "catppuccin-macchiato"
+@theme "squared-catppuccin-blue"
 
