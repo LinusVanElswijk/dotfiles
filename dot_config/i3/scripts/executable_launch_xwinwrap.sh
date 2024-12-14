@@ -3,7 +3,7 @@
 # width height offset_x offset_y, per monitor
 all_monitors="$(xrandr --listactivemonitors | awk '/^[ 0-9]+:/ {split($3,a,"[x/+]+"); print a[1], a[3], a[5], a[6]}')"
 
-killall xwinwrap; sleep 0.5s  # sleep to avoid race conditions
+killall --wait xwinwrap
 
 while IFS= read -r monitor; do
     monitor=($monitor)  # convert string to array of words
