@@ -1,6 +1,6 @@
 #!/bin/bash
 
-killall polybar
+killall --wait polybar
 if type "xrandr"; then
   primary_monitor=$(xrandr --listactivemonitors | grep \* | cut -d" " -f6)
 
