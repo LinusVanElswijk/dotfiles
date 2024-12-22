@@ -7,6 +7,7 @@
 
 set $mod Mod4
 
+set $lock_command "i3lock --nofork --show-failed-attempts --show-keyboard-layout --color 24273a 󰇘/.config/i3/scripts"
 
 # }}}
 # Monitors ##################################################################{{{
@@ -17,45 +18,18 @@ set $monitor3 eDP-1
 
 
 # }}}
-# workspaces ################################################################{{{
+# Workspaces ################################################################{{{
 
-# ws1 {{{
 set $ws1 "1:"
-workspace $ws1 output $monitor1
-
-assign [class="^kitty$"] $ws1
-# }}}
-
-# ws2 {{{
 set $ws2 "2:"
-workspace $ws2 output $monitor2
-
-assign [class="^firefox$"] $ws2
-# }}}
-
-# ws3 {{{
 set $ws3 "3:"
-workspace $ws3 output $monitor3
-# }}}
-
-# ws4 {{{
 set $ws4 "4:"
-workspace $ws4 output $monitor1
-
-assign [class="^thunderbird$"] $ws4
-# }}}
-
-# ws5 {{{
 set $ws5 "5:"
-workspace $ws5 output $monitor3
-# }}}
-
 set $ws6 "6:"
 set $ws7 "7:󰭹"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "0:"
-
 
 for_window [class="^lazygit-float$"] floating enable
 for_window [class="^lazygit-float$"] resize set 95 ppt 90 ppt
@@ -82,12 +56,12 @@ bindsym $mod+x kill
 bindsym $mod+minus move scratchpad
 
 # rofi menus
-bindsym $mod+space exec "rofi -modi combi,drun,window -show combi"
+bindsym $mod+space exec "rofi -modi combi,drun,window -show drun"
 bindsym $mod+Tab exec "rofi -modi combi,drun,window -show window"
-bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show drun"
-bindsym $mod+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
+bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show combi"
+bindsym Mod1+Ctrl+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
 
-bindsym $mod+Ctrl+l exec "i3lock"
+bindsym Mod1+Ctrl+l exec $lock_command
 
 # change focus
 bindsym $mod+h focus left
@@ -134,7 +108,7 @@ bindsym $mod+Shift+i floating toggle
 bindsym $mod+i focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -163,14 +137,25 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
+# move focused workspace to monitor
+bindsym $mod+Ctrl+h move workspace to output left
+bindsym $mod+Ctrl+j move workspace to output down
+bindsym $mod+Ctrl+k move workspace to output up
+bindsym $mod+Ctrl+l move workspace to output right
+
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Down move workspace to output down
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Right move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+XF86AudioRaiseVolume exec ~/.config/i3/scripts/play_test_sound.sh
@@ -299,7 +284,7 @@ exec_always --no-startup-id ~/.config/i3/scripts/enable_touchpad_natural_scrolli
 exec --no-startup-id dex --autostart --environment i3
 
 # config lock screen
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --show-failed-attempts --show-keyboard-layout --color 24273a 󰇘/.config/i3/scripts
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock_command
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
