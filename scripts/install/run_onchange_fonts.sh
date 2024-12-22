@@ -12,6 +12,7 @@ font_singular_sources=(
 )
 
 target_dir="$HOME/.fonts/"
+mkdir -p $target_dir
 
 tempdir="$(mktemp -d /tmp/dl_fonts_XXXXXXXX)"
 cd "$tempdir"
