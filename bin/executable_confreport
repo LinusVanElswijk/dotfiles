@@ -8,7 +8,7 @@ declare -A command_descriptions=(
   [curl]=""
   [delta]="A syntax-highlighting pager for git, diff, grep, and blame output"
   [docker]=""
-  [fdfind]="better find"
+  [fd]="better find"
   [feh]="used for desktop background images"
   [fish]="user-friendly command line shell"
   [fzf]="fuzzy finder"
@@ -16,6 +16,7 @@ declare -A command_descriptions=(
   [jumpapp]="switch or open app"
   [kitty]="terminal emulator"
   [node]=""
+  [npm]=""
   [nvim]="neovim"
   [picom]="compositor for the X Window  System"
   [polybar]="status bar"
@@ -48,8 +49,8 @@ echo -e "\nSystem Config Check\n===================="
 
 echo -e "\nChecking available commands:"
 for cmd in "${!command_descriptions[@]}"; do
-  if which "$cmd" &>/dev/null; then
-    path=$(which "$cmd")
+  if command -v "$cmd" &>/dev/null; then
+    path=$(command -v "$cmd")
     echo -e "${GREEN}✔ Found${DEFAULT_COLOR}    : $cmd -> $path"
   else
     echo -e "${RED}✘ Not Found${DEFAULT_COLOR}: $cmd  # ${command_descriptions[$cmd]}"
