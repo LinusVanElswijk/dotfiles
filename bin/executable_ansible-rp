@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ansible -K localhost\
+        --connection local\
+        --module-name include_role\
+        --args name=$1
+ 

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-ansible -K localhost\
-        -c local\
-        -m include_role\
-        -a name=$USER-environment
- 
