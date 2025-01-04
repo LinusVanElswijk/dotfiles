@@ -2,13 +2,13 @@ export PATH="$PATH:$HOME/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Preferred editor
-if command -v nvim 2>&1 >/dev/null; then
+if command -v nvim >/dev/null 2>&1; then
   export EDITOR=nvim
   export VISUAL="$EDITOR"
 fi
 
 # Preferred terminal
-if command -v kitty 2>&1 >/dev/null; then
+if command -v kitty >/dev/null 2>&1; then
   export TERMINAL=kitty
 fi
 
