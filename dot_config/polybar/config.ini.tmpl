@@ -1,5 +1,5 @@
 ; vim: filetype=dosini
-; vim: foldmethod=marker
+; vim: foldmethod=marker:fmr=<<<,>>>
 
 ;==========================================================
 ;
@@ -20,7 +20,7 @@
 ;==========================================================
 
 
-; Colors ==============================================={{{
+; Colors ===============================================<<<
 
 [catppuccin]
 ;-------------------------
@@ -86,16 +86,16 @@ power_adapter = ADP1
 {{- end }}
 
 
-; }}}
-; Glyphs =================================================={{{
+; >>>
+; Glyphs ==================================================<<<
 
 [glyph]
 hard_right = 
 soft_right = 
 
 
-; }}}
-; Modules ================================================={{{
+; >>>
+; Modules =================================================<<<
 
 [module/xworkspaces]
 type = internal/xworkspaces
@@ -124,7 +124,7 @@ exec = echo "${MONITOR} "
 type = internal/xwindow
 label = %title:0:60:...%
 
-; Separators {{{
+; Separators <<<
 
 [module/rsep1]
 type = custom/text
@@ -168,7 +168,7 @@ content = ${glyph.hard_right}
 content-background = ${colors.shade5}
 content-foreground = ${colors.shade6}
 
-; }}}
+; >>>
 
 [module/cpu]
 type = internal/cpu
@@ -333,8 +333,8 @@ label-discharging-background = ${colors.shade6}
 label-discharging-foreground = ${colors.background}
 
 
-; }}}
-; Bars ================================================={{{
+; >>>
+; Bars =================================================<<<
 
 [bar/main]
 monitor = ${env:MONITOR:}
@@ -407,11 +407,11 @@ cursor-scroll = ns-resize
 enable-ipc = true
 
 
-; }}}
-; Settings ============================================={{{
+; >>>
+; Settings =============================================<<<
 
 [settings]
 screenchange-reload = true
 pseudo-transparency = true 
 
-; }}}
+; >>>
