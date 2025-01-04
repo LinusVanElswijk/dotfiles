@@ -72,6 +72,19 @@ shade4 = ${catppuccin.sky}
 shade5 = ${catppuccin.blue}
 shade6 = ${catppuccin.lavender}
 
+[machine]
+{{- if eq .chezmoi.hostname "msi-linus-home" }}
+wired_interface = enp3s0
+wireless_interface = wlan0
+battery = BAT1
+power_adapter = ADP1
+{{- else }}
+wired_interface = enp0s31f6
+wireless_interface = wlp0s20f3
+battery = BAT0
+power_adapter = ADP1
+{{- end }}
+
 
 ; }}}
 ; Glyphs =================================================={{{
@@ -160,7 +173,7 @@ content-foreground = ${colors.shade6}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "󰍹  "
+format-prefix = ""
 format = " <ramp-load> "
 label = "%percentage:2%% "
 format-foreground = ${colors.background}
@@ -181,7 +194,7 @@ ramp-load-8 = 󰪥
 type = internal/memory
 interval = 2
 format = " <ramp-used> "
-label = "%ramp-used%"
+label = "%ramp-used%
 format-foreground = ${colors.background}
 format-background = ${colors.shade1}
 
@@ -217,7 +230,7 @@ speed-unit = ''
 
 [module/wired-network]
 type = internal/network
-interface = enp0s31f6
+interface = ${machine.wired_interface}
 
 format-disconnected = "%{A1:exec cinnamon-settings network:}<label-disconnected>%{A}"
 format-connected = "%{A1:exec cinnamon-settings network:}<label-connected>%{A}"
@@ -231,10 +244,10 @@ label-disconnected-background = ${colors.shade2}
 
 [module/wireless-network]
 type = internal/network
-interface = wlp0s20f3
+interface = ${machine.wireless_interface}
 
 format-disconnected = "%{A1:exec cinnamon-settings network:}󰤮  %{A}"
-format-connected = "%{A1:exec cinnamon-settings network:} <ramp-signal> <label-connected> %{A}"
+format-connected = "%{A1:exec cinnamon-settings network:}<ramp-signal> %{A}"
 label-connected = %essid%
 ramp-signal-0 = 󰤠
 ramp-signal-1 = 󰤟
@@ -301,8 +314,8 @@ full-at = 98
 
 ; Use the following command to list batteries and adapters:
 ; $ ls -1 /sys/class/power_supply/
-battery = BAT0
-adapter = ADP1
+battery = ${machine.battery}
+adapter = ${machine.power_adapter}
 
 ; Disable polling by setting the interval to 0.
 ; Default: 5
@@ -328,7 +341,7 @@ monitor = ${env:MONITOR:}
 bottom = false
 
 width = 100%
-height = 19pt
+height = 14pt
 radius = 0
 
 ; dpi = 96
@@ -348,7 +361,7 @@ module-margin = 0
 separator =
 separator-foreground = ${colors.disabled}
 
-font-0 = IosevkaTerm NF Medium:size=11;2
+font-0 = IosevkaTerm NF Medium:size=13;2
 
 modules-left = xworkspaces
 modules-center= xwindow
@@ -364,7 +377,7 @@ monitor = ${env:MONITOR:}
 bottom = false
 
 width = 100%
-height = 19pt
+height = 17pt
 radius = 0
 
 background = ${colors.background}
