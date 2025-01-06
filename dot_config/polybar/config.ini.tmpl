@@ -379,7 +379,11 @@ separator-foreground = ${colors.disabled}
 
 ; font-0 for normal text, font-1 for glyphs
 font-0 = IosevkaTerm NF Medium:size=11;3
+{{- if eq .chezmoi.hostname "msi-linus-home" }}
+font-1 = IosevkaTerm NF Medium:size=18;3
+{{- else }}
 font-1 = IosevkaTerm NF Medium:size=12;2
+{{- end }}
 
 modules-left = xworkspaces
 modules-center= xwindow
