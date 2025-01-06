@@ -2,7 +2,7 @@
 
 GLYPH_OFF=󰂲
 GLYPH_ON=󰂯
-GLYPH_ACTIVE=󰂰
+GLYPH_ACTIVE=󰂱
 
 
 if [ "$(bluetoothctl show | grep -c 'Powered: yes')" -eq 0 ]; then
