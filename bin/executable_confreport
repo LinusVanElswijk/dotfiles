@@ -15,6 +15,7 @@ declare -A command_descriptions=(
   [git]=""
   [jumpapp]="switch or open app"
   [kitty]="terminal emulator"
+  [lazygit]="git tui"
   [node]=""
   [npm]=""
   [nvim]="neovim"
@@ -26,6 +27,7 @@ declare -A command_descriptions=(
   [wget]=""
   [xwinwrap]="used for desktop background videos"
   [xrandr]=""
+  [yazi]="file explorer"
   [zoxide]=""
 )
 
