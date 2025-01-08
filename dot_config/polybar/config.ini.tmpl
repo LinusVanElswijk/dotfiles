@@ -58,7 +58,7 @@ transparent = #FF00000
 
 [colors]
 background = ${catppuccin.mantle}
-background-alt = ${catppuccin.surface1}
+background-alt = ${catppuccin.surface0}
 foreground = ${catppuccin.text}
 primary = ${catppuccin.blue}
 secondary = ${catppuccin.mantle}
@@ -124,41 +124,6 @@ inherit = module/lsep_soft
 content-background = ${colors.background}
 content-foreground = ${colors.foreground}
 
-[module/rsep0_soft]
-inherit = module/rsep_soft
-content-background = ${colors.background}
-content-foreground = ${colors.foreground}
-
-[module/rsep1]
-inherit = module/rsep_hard
-content-background = ${colors.background}
-content-foreground = ${colors.shade1}
-
-[module/rsep2]
-inherit = module/rsep_hard
-content-background = ${colors.shade1}
-content-foreground = ${colors.shade2}
-
-[module/rsep2_soft]
-inherit = module/rsep_soft
-content-background = ${colors.shade2}
-content-foreground = ${colors.background}
-
-[module/rsep3]
-inherit = module/rsep_hard
-content-background = ${colors.shade2}
-content-foreground = ${colors.shade3}
-
-[module/rsep4]
-inherit = module/rsep_hard
-content-background = ${colors.shade3}
-content-foreground = ${colors.shade4}
-
-[module/rend]
-type = custom/text
-content = " "
-content-background = ${colors.shade4}
-
 ; >>>
 
 ; Left Module Group <<<
@@ -221,6 +186,7 @@ label-urgent-padding = 0
 label-separator = 
 label-separator-padding = 1
 label-separator-foreground = ${colors.background}
+label-separator-font = 2
 
 [module/lsep2]
 inherit = module/lsep_hard
@@ -240,148 +206,35 @@ modules =
 
 ; >>>
 
+; Right Module Group <<<
 
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = ""
-format = <ramp-load>
-label = %percentage:2%%
-format-foreground = ${colors.background}
-format-background = ${colors.shade1}
+[right_group]
+modules = keyboard rsep0_soft battery rsep0_soft cpu memory rsep1 wired-network wireless-network bluetooth rsep1_0 pulseaudio rsep2 date rend
+color_1 = ${catppuccin.green}
+color_2 = ${catppuccin.mauve}
+color_3 = ${catppuccin.red}
+color_4 = ${catppuccin.blue}
 
-ramp-load-0 = "󰄰 "
-ramp-load-1 = "󰪞 "
-ramp-load-2 = "󰪟 "
-ramp-load-3 = "󰪠 "
-ramp-load-4 = "󰪢 "
-ramp-load-5 = "󰪣 "
-ramp-load-6 = "󰪡 "
-ramp-load-7 = "󰪤 "
-ramp-load-8 = "󰪥 "
+[module/rsep0_soft]
+inherit = module/rsep_soft
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
 
-[module/memory]
-type = internal/memory
-interval = 2
-format = <ramp-used>
-label = %ramp-used%
-format-foreground = ${colors.background}
-format-background = ${colors.shade1}
 
-ramp-used-0 = "󰄰 "
-ramp-used-1 = "󰪞 "
-ramp-used-2 = "󰪟 "
-ramp-used-3 = "󰪠 "
-ramp-used-4 = "󰪢 "
-ramp-used-5 = "󰪣 "
-ramp-used-6 = "󰪡 "
-ramp-used-7 = "󰪤 "
-ramp-used-8 = "󰪥 "
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %percentage_used%%
-label-mounted-foreground = ${colors.background}
-label-mounted-background = ${colors.shade1}
-
-label-unmounted = 
-
-[module/network]
-type = internal/network
-interval = 3.0
-udspeed-minwidth = 5
-accumulate-stats = true
-unknown-as-up = true
-speed-unit = ''
-
-[module/wired-network]
-type = internal/network
-color = ${colors.shade2}
-interface = ${machine.wired_interface}
-
-format-disconnected = %{A1:exec cinnamon-settings network:}<label-disconnected>%{A}
-format-connected = %{A1:exec cinnamon-settings network:}<label-connected>%{A}
-label-connected = "󰈁 "
-label-disconnected = ""
-
-label-connected-foreground = ${colors.background}
-label-connected-background = ${self.color}
-label-disconnected-foreground = ${colors.background}
-label-disconnected-background = ${self.color}
-
-[module/wireless-network]
-type = internal/network
-interface = ${machine.wireless_interface}
-
-format-disconnected = %{A1:exec cinnamon-settings network:}󰤮  %{A}
-format-connected = %{A1:exec cinnamon-settings network:}<ramp-signal>%{A}
-label-connected = %essid%
-ramp-signal-0 = "󰤠 "
-ramp-signal-1 = "󰤟 "
-ramp-signal-2 = "󰤢 "
-ramp-signal-3 = "󰤥 "
-ramp-signal-4 = "󰤨 "
-format-connected-background= ${colors.shade2}
-format-connected-foreground= ${colors.background}
-format-disconnected-background= ${colors.shade2}
-format-disconnected-foreground= ${colors.background}
-
-[module/bluetooth]
-type = custom/script
-exec = ~/.config/polybar/scripts/bluetooth_status_glyph.sh
-label = %output%
-interval = 5
-click-left = exec blueman-manager
-click-right = exec blueman-manager
-format-padding = 1
-format-background = ${colors.shade2}
-format-foreground = ${colors.background}
-
-[module/pulseaudio]
-type = internal/pulseaudio
-
-format-volume-prefix = " "
-format-volume = <label-volume>
-format-volume-foreground = ${colors.background}
-format-volume-background = ${colors.shade3}
-
-label-volume = %percentage%%
-
-label-muted = " %percentage%%"
-label-muted-background = ${colors.shade3}
-label-muted-foreground = ${colors.background}
-
-click-right = pavucontrol
-
-[module/xkeyboard]
+[module/keyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 format= 󰌌 <label-layout>
 label-layout = %name%
 format-background = ${colors.background}
-format-foreground = ${catppuccin.green}
+format-foreground = ${right_group.color_1}
 
 label-indicator-padding = 0
 label-indicator-margin = 0
 
-[module/date]
-type = internal/date
-interval = 1
-
-date = 󰥔 %H:%M
-date-alt = 󰃶 %d-%m-%Y  󰥔 %H:%M:%S
-
-label =  %date%
-label-foreground = ${colors.background}
-label-background = ${colors.shade4}
-
 [module/battery]
 type = internal/battery
-color = ${catppuccin.mauve}
+color = ${right_group.color_2}
 full-at = 95
 
 ; Use the following command to list batteries and adapters:
@@ -399,6 +252,7 @@ format-charging = <ramp-capacity><label-charging>
 label-charging = 󰁝 %percentage%%
 format-discharging = <ramp-capacity><label-discharging>
 label-discharging = 󰁅 %time%
+time-format = %H:%M
 
 format-full-background = ${colors.background}
 format-full-foreground = ${self.color}
@@ -407,18 +261,156 @@ format-charging-foreground = ${self.color}
 format-discharging-background = ${colors.background}
 format-discharging-foreground = ${self.color}
 
-ramp-capacity-0 = "󱃍 "
-ramp-capacity-1 = "󰁺 "
-ramp-capacity-2 = "󰁻 "
-ramp-capacity-3 = "󰁼 "
-ramp-capacity-4 = "󰁽 "
-ramp-capacity-5 = "󰁾 "
-ramp-capacity-6 = "󰁾 "
-ramp-capacity-7 = "󰂀 "
-ramp-capacity-8 = "󰂁 "
-ramp-capacity-9 = "󰂂 "
-ramp-capacity-10 = "󱟢 "
+ramp-capacity-padding = 2px
+ramp-capacity-0 = 󱃍
+ramp-capacity-1 = 󰁺
+ramp-capacity-2 = 󰁻
+ramp-capacity-3 = 󰁼
+ramp-capacity-4 = 󰁽
+ramp-capacity-5 = 󰁾
+ramp-capacity-6 = 󰁾
+ramp-capacity-7 = 󰂀
+ramp-capacity-8 = 󰂁
+ramp-capacity-9 = 󰂂
+ramp-capacity-10 = 󱟢
 
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = ""
+format = <ramp-load>
+label = %percentage:2%%
+format-foreground = ${right_group.color_3}
+format-background = ${colors.background}
+
+ramp-load-0 = "󰄰 "
+ramp-load-1 = "󰪞 "
+ramp-load-2 = "󰪟 "
+ramp-load-3 = "󰪠 "
+ramp-load-4 = "󰪡 "
+ramp-load-5 = "󰪢 "
+ramp-load-6 = "󰪣 "
+ramp-load-7 = "󰪤 "
+ramp-load-8 = "󰪥 "
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <ramp-used>
+label = %ramp-used%
+format-foreground = ${right_group.color_3}
+format-background = ${colors.background}
+
+ramp-used-0 = "󰄰 "
+ramp-used-1 = "󰪞 "
+ramp-used-2 = "󰪟 "
+ramp-used-3 = "󰪠 "
+ramp-used-4 = "󰪡 "
+ramp-used-5 = "󰪢 "
+ramp-used-6 = "󰪣 "
+ramp-used-7 = "󰪤 "
+ramp-used-8 = "󰪥 "
+
+[module/rsep1]
+inherit = module/rsep_hard
+content-background = ${colors.background}
+content-foreground = ${colors.background-alt}
+
+[module/network]
+type = internal/network
+interval = 3.0
+udspeed-minwidth = 5
+accumulate-stats = true
+unknown-as-up = true
+speed-unit = ''
+
+[module/wired-network]
+type = internal/network
+interface = ${machine.wired_interface}
+
+format-padding = 2px
+format-disconnected = %{A1:exec cinnamon-settings network:}<label-disconnected>%{A}
+format-connected = %{A1:exec cinnamon-settings network:}<label-connected>%{A}
+label-connected = 󰈁
+label-disconnected = 
+
+label-connected-foreground = ${right_group.color_4}
+label-connected-background = ${colors.background-alt}
+label-disconnected-foreground = ${right_group.color_4}
+label-disconnected-background = ${colors.background-alt}
+
+[module/wireless-network]
+type = internal/network
+interface = ${machine.wireless_interface}
+format-padding = 2px
+format-disconnected = %{A1:exec cinnamon-settings network:}󰤮  %{A}
+format-connected = %{A1:exec cinnamon-settings network:}<ramp-signal>%{A}
+label-connected = %essid%
+ramp-signal-0 = "󰤠 "
+ramp-signal-1 = "󰤟 "
+ramp-signal-2 = "󰤢 "
+ramp-signal-3 = "󰤥 "
+ramp-signal-4 = "󰤨 "
+
+format-connected-background= ${colors.background-alt}
+format-connected-foreground= ${right_group.color_4}
+format-disconnected-background= ${colors.background-alt}
+format-disconnected-foreground= ${right_group.color_4}
+
+[module/bluetooth]
+type = custom/script
+exec = ~/.config/polybar/scripts/bluetooth_status_glyph.sh
+label = %output%
+interval = 5
+click-left = exec blueman-manager
+click-right = exec blueman-manager
+format-padding = 2px
+format-background = ${colors.background-alt}
+format-foreground = ${right_group.color_4}
+
+[module/rsep1_0]
+inherit = module/rsep_soft
+content-background = ${colors.background-alt}
+content-foreground = ${colors.background}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = " "
+format-volume = <label-volume>
+format-volume-foreground = ${right_group.color_4}
+format-volume-background = ${colors.background-alt}
+
+label-volume = %percentage%%
+
+label-muted = " %percentage%%"
+label-muted-foreground = ${right_group.color_4}
+label-muted-background = ${colors.background-alt}
+
+click-right = pavucontrol
+
+[module/rsep2]
+inherit = module/rsep_hard
+content-background = ${colors.background-alt}
+content-foreground = ${right_group.color_4}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = 󰥔 %H:%M
+date-alt = 󰃶 %d-%m-%Y  󰥔 %H:%M:%S
+
+label =  %date%
+label-foreground = ${colors.background}
+label-background = ${right_group.color_4}
+
+[module/rend]
+type = custom/text
+content = " "
+content-background = ${right_group.color_4}
+
+; >>>
 
 ; >>>
 ; Bars =================================================<<<
@@ -428,7 +420,7 @@ monitor = ${env:MONITOR:}
 bottom = false
 
 width = 100%
-height = 18pts
+height = 20px
 radius = 0
 
 background = ${colors.background}
@@ -448,11 +440,7 @@ separator-foreground = ${colors.disabled}
 
 ; font-0 for normal text, font-1 for glyphs
 font-0 = IosevkaTerm NF Medium:size=11;3
-{{- if eq .chezmoi.hostname "msi-linus-home" }}
-font-1 = IosevkaTerm NF Medium:size=18;3
-{{- else }}
 font-1 = IosevkaTerm NF Medium:size=12;2
-{{- end }}
 
 modules-left = ${left_group.modules}
 modules-center= ${center_group.modules}
@@ -464,8 +452,7 @@ enable-ipc = true
 
 [bar/main]
 inherit = bar/base
-modules-right = xkeyboard rsep0_soft battery rsep1 cpu memory rsep2 wired-network wireless-network bluetooth rsep3 pulseaudio rsep4 date rend
-
+modules-right = ${right_group.modules}
 
 [bar/other]
 inherit = bar/base
