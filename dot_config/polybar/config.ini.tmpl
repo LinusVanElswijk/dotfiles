@@ -58,7 +58,7 @@ transparent = #FF00000
 
 [colors]
 background = ${catppuccin.mantle}
-background-alt = ${catppuccin.blue}
+background-alt = ${catppuccin.surface1}
 foreground = ${catppuccin.text}
 primary = ${catppuccin.blue}
 secondary = ${catppuccin.mantle}
@@ -90,87 +90,156 @@ power_adapter = ADP1
 [glyph]
 hard_right = " █"
 soft_right = "  "
+hard_left = "█ "
+soft_left = "  "
 
 ; >>>
 ; Modules =================================================<<<
 
-[module/xworkspaces]
-type = internal/xworkspaces
 
-label-active = %name%
-label-active-background = ${colors.background-alt}
-label-active-underline = ${colors.primary}
-label-active-padding = 1
+; Separators <<<
 
-label-occupied = %name%
-label-occupied-padding = 1
+[module/rsep_hard]
+type = custom/text
+content = ${glyph.hard_right}
+content-font = 2
 
-label-urgent = %name%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 1
+[module/rsep_soft]
+type = custom/text
+content = ${glyph.soft_right}
+content-font = 2
 
-label-empty = %name%
-label-empty-foreground = ${colors.disabled}
-label-empty-padding = 1
+[module/lsep_hard]
+type = custom/text
+content = ${glyph.hard_left}
+content-font = 2
+
+[module/lsep_soft]
+type = custom/text
+content = ${glyph.soft_left}
+content-font = 2
+
+[module/lsep0_soft]
+inherit = module/lsep_soft
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
+
+[module/rsep0_soft]
+inherit = module/rsep_soft
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
+
+[module/rsep1]
+inherit = module/rsep_hard
+content-background = ${colors.background}
+content-foreground = ${colors.shade1}
+
+[module/rsep2]
+inherit = module/rsep_hard
+content-background = ${colors.shade1}
+content-foreground = ${colors.shade2}
+
+[module/rsep2_soft]
+inherit = module/rsep_soft
+content-background = ${colors.shade2}
+content-foreground = ${colors.background}
+
+[module/rsep3]
+inherit = module/rsep_hard
+content-background = ${colors.shade2}
+content-foreground = ${colors.shade3}
+
+[module/rsep4]
+inherit = module/rsep_hard
+content-background = ${colors.shade3}
+content-foreground = ${colors.shade4}
+
+[module/rend]
+type = custom/text
+content = " "
+content-background = ${colors.shade4}
+
+; >>>
+
+; Left Module Group <<<
+
+[left_group]
+modules = lbegin monitor lsep1 monitor_workspaces lsep2 i3_status window
+color_1 = ${colors.primary}
+color_2 = ${catppuccin.red}
+
+[module/i3_status]
+type = internal/i3
+format-prefix = " "
+format = <label-mode>
+format-suffix = "  "
+format-foreground = ${left_group.color_2}
+format-background = ${colors.background}
+format-suffix-foreground = ${colors.foreground}
+format-suffix-font = 2
+
+[module/lbegin]
+type = custom/text
+content = " "
+content-background = ${left_group.color_1}
 
 [module/monitor]
 type = custom/text
 content = ${env:MONITOR:unknown monitor}
 content-prefix = "󰍹 "
-content-foreground = ${colors.primary}
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:60:...%
-
-; Separators <<<
-
-[module/rsep_hard_right]
-type = custom/text
-content = ${glyph.hard_right}
-content-font = 2
-
-[module/rsep_soft_right]
-type = custom/text
-content = ${glyph.soft_right}
-content-font = 2
-
-[module/rsep0_soft]
-inherit = module/rsep_soft_right
-content-background = ${colors.background}
-content-foreground = ${colors.foreground}
-
-[module/rsep1]
-inherit = module/rsep_hard_right
-content-background = ${colors.background}
-content-foreground = ${colors.shade1}
-
-[module/rsep2]
-inherit = module/rsep_hard_right
-content-background = ${colors.shade1}
-content-foreground = ${colors.shade2}
-
-[module/rsep2_soft]
-inherit = module/rsep_soft_right
-content-background = ${colors.shade2}
 content-foreground = ${colors.background}
+content-background = ${left_group.color_1}
 
-[module/rsep3]
-inherit = module/rsep_hard_right
-content-background = ${colors.shade2}
-content-foreground = ${colors.shade3}
+[module/lsep1]
+inherit = module/lsep_hard
+content-foreground = ${left_group.color_1}
+content-background = ${colors.background-alt}
 
-[module/rsep4]
-inherit = module/rsep_hard_right
-content-background = ${colors.shade3}
-content-foreground = ${colors.shade4}
+[module/monitor_workspaces]
+type = internal/i3
+format = <label-state>
+format-foreground = ${left_group.color_1}
+format-background = ${colors.background-alt}
+pin-workspaces = true
 
-[module/rend]
-inherit = module/rsep_hard_right
-content = " "
-content-background = ${colors.shade4}
+label-focused = 󰻃 %name%
+label-focused-foreground = ${colors.primary}
+label-focused-padding = 0
+
+label-visible = 󰻃 %name%
+label-visible-foreground = ${colors.disabled}
+label-visible-padding = 0
+
+label-unfocused = 󰄰 %name%
+label-unfocused-foreground = ${colors.disabled}
+label-unfocused-padding = 0
+
+label-urgent = 󰵛 %name%
+label-urgent-foreground = ${colors.alert}
+label-urgent-padding = 0
+
+label-separator = 
+label-separator-padding = 1
+label-separator-foreground = ${colors.background}
+
+[module/lsep2]
+inherit = module/lsep_hard
+content-foreground = ${colors.background-alt}
+content-background = ${colors.background}
+
+[module/window]
+type = internal/xwindow
+label = %title:0:80:...%
 
 ; >>>
+
+; Center Module Group <<<
+
+[center_group]
+modules =
+
+; >>>
+
 
 [module/cpu]
 type = internal/cpu
@@ -385,8 +454,8 @@ font-1 = IosevkaTerm NF Medium:size=18;3
 font-1 = IosevkaTerm NF Medium:size=12;2
 {{- end }}
 
-modules-left = xworkspaces
-modules-center= xwindow
+modules-left = ${left_group.modules}
+modules-center= ${center_group.modules}
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -395,12 +464,12 @@ enable-ipc = true
 
 [bar/main]
 inherit = bar/base
-modules-right = monitor rsep0_soft xkeyboard rsep0_soft battery rsep1 cpu memory rsep2 wired-network wireless-network bluetooth rsep3 pulseaudio rsep4 date rend
+modules-right = xkeyboard rsep0_soft battery rsep1 cpu memory rsep2 wired-network wireless-network bluetooth rsep3 pulseaudio rsep4 date rend
 
 
 [bar/other]
 inherit = bar/base
-modules-right = monitor
+modules-right =
 
 
 ; >>>
