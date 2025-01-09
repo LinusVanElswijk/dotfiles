@@ -270,6 +270,9 @@ exec --no-startup-id sh -c "\
     ~/.config/i3/scripts/launch_xwinwrap.sh &\
     ~/.config/polybar/scripts/launch_polybar.sh)"
 
+# Ensure dunst is running
+exec --no-startup-id ~/.config/i3/scripts/ensure_dunst_is_running.sh
+
 # Keyboard layout settings
 exec --no-startup-id setxkbmap -layout us,us -variant ,dvorak -option grp:alt_space_toggle
 
