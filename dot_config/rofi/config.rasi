@@ -8,6 +8,7 @@ configuration{
     location: 0;
     matching: "fuzzy";
     sort: true;
+    levenstein-sort: false;
     disable-history: true;
     hide-scrollbar: true;
     display-combi: " 󱞰 Jump";
