@@ -161,6 +161,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+XF86AudioRaiseVolume exec ~/.config/i3/scripts/play_test_sound.sh
 
+# notifications
+bindsym $mod+n exec --no-startup-id dbus-send --session --print-reply --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotifications
+
 # resize mode {{{
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -261,24 +264,20 @@ smart_gaps on
 # }}}
 # Startup ###################################################################{{{
 
-# Use autorandr to load the monitor setup
-exec --no-startup-id autorandr --change;
-exec sleep 1
-
 # Use picom compositor
 exec --no-startup-id picom
 
-# Video background with xwinwrap and mpv
-exec_always --no-startup-id ~/.config/i3/scripts/launch_xwinwrap.sh
+# Activate monitors and then add a status bar and wallpaper to them
+exec --no-startup-id sh -c "\
+  autorandr --change && (\
+    ~/.config/i3/scripts/launch_xwinwrap.sh &\
+    ~/.config/polybar/scripts/launch_polybar.sh)"
 
-# Status bar with polybar
-exec_always --no-startup-id ~/.config/polybar/scripts/launch_polybar.sh
+# Switch to i3-notifier (if available)
+exec --no-startup-id ~/.config/i3/scripts/launch_i3_notifier.sh
 
 # Keyboard layout settings
 exec --no-startup-id setxkbmap -layout us,us -variant ,dvorak -option grp:alt_space_toggle
-
-# Enable natural scrolling for touchpad scrolling (intuitive directions)
-exec_always --no-startup-id ~/.config/i3/scripts/enable_touchpad_natural_scrolling.sh
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -287,9 +286,7 @@ exec --no-startup-id dex --autostart --environment i3
 # config lock screen
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock_command
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
-
+# Enable natural scrolling for touchpad scrolling (intuitive directions)
+exec_always --no-startup-id ~/.config/i3/scripts/enable_touchpad_natural_scrolling.sh
 
 # }}}
