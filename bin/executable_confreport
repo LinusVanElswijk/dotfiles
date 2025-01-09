@@ -8,6 +8,7 @@ declare -A command_descriptions=(
   [curl]=""
   [delta]="A syntax-highlighting pager for git, diff, grep, and blame output"
   [docker]=""
+  [dunst]="notifation daemon"
   [fd]="better find"
   [feh]="used for desktop background images"
   [fish]="user-friendly command line shell"
