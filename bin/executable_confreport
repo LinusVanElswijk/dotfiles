@@ -13,7 +13,6 @@ declare -A command_descriptions=(
   [fish]="user-friendly command line shell"
   [fzf]="fuzzy finder"
   [git]=""
-  [i3-notifier]="notification manager for i3"
   [jumpapp]="switch or open app"
   [kitty]="terminal emulator"
   [lazygit]="git tui"

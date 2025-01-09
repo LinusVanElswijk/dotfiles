@@ -161,9 +161,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+XF86AudioRaiseVolume exec ~/.config/i3/scripts/play_test_sound.sh
 
-# notifications
-bindsym $mod+n exec --no-startup-id dbus-send --session --print-reply --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotifications
-
 # resize mode {{{
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -272,9 +269,6 @@ exec --no-startup-id sh -c "\
   autorandr --change && (\
     ~/.config/i3/scripts/launch_xwinwrap.sh &\
     ~/.config/polybar/scripts/launch_polybar.sh)"
-
-# Switch to i3-notifier (if available)
-exec --no-startup-id ~/.config/i3/scripts/launch_i3_notifier.sh
 
 # Keyboard layout settings
 exec --no-startup-id setxkbmap -layout us,us -variant ,dvorak -option grp:alt_space_toggle

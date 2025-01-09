@@ -209,7 +209,7 @@ modules =
 ; Right Module Group <<<
 
 [right_group]
-modules = keyboard rsep0_soft battery rsep0_soft cpu memory notifications rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
+modules = keyboard rsep0_soft battery rsep0_soft cpu memory rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
 color_1 = ${catppuccin.green}
 color_2 = ${catppuccin.mauve}
 color_3 = ${catppuccin.red}
@@ -310,19 +310,6 @@ ramp-used-6 = "󰪣 "
 ramp-used-7 = "󰪤 "
 ramp-used-8 = "󰪥 "
 
-[module/notifications]
-type = custom/script
-exec = ~/.config/polybar/scripts/i3-notifier-status.sh
-format-prefix = "  "
-label = %output%
-interval = 1
-format-background = ${colors.background}
-format-foreground = ${colors.alert}
-format-prefix-font = 2
-format-prefix-foreground = ${colors.foreground}
-click-left = exec dbus-send --session --print-reply --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotifications
-click-right = exec dbus-send --session --print-reply --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.ShowNotifications
-
 [module/rsep1]
 inherit = module/rsep_hard
 content-background = ${colors.background}
@@ -379,6 +366,7 @@ format-foreground = ${right_group.color_4}
 
 [module/rsep1_0]
 inherit = module/rsep_soft
+content = "  "
 content-background = ${colors.background-alt}
 content-foreground = ${colors.background}
 
