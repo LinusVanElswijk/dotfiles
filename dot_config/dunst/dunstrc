@@ -15,7 +15,7 @@ notification_limit = 5
 gap_size = 12
 padding = 12
 horizontal_padding = 20
-frame_width = 1
+frame_width = 2
 sort = no
 
 # Progress bar
