@@ -35,7 +35,7 @@ mauve = #cba6f7
 red = #f38ba8
 maroon = #eba0ac
 peach = #fab387
-yellow = #f9e2af
+yellow = #f9e2af 
 green = #a6e3a1
 teal = #94e2d5
 sky = #89dceb
@@ -62,8 +62,8 @@ background-alt = ${catppuccin.surface0}
 foreground = ${catppuccin.text}
 primary = ${catppuccin.blue}
 secondary = ${catppuccin.mantle}
-alert = ${catppuccin.peach}
-disabled = ${catppuccin.subtext1}
+alert = ${catppuccin.red}
+disabled = ${catppuccin.overlay0}
 
 shade1 = ${catppuccin.maroon}
 shade2 = ${catppuccin.yellow}
@@ -209,10 +209,10 @@ modules =
 ; Right Module Group <<<
 
 [right_group]
-modules = keyboard rsep0_soft battery rsep0_soft cpu memory rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
+modules = keyboard rsep0_soft cpu memory rsep0_soft battery rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
 color_1 = ${catppuccin.green}
 color_2 = ${catppuccin.mauve}
-color_3 = ${catppuccin.red}
+color_3 = ${catppuccin.pink}
 color_4 = ${catppuccin.blue}
 
 [module/rsep0_soft]
@@ -232,9 +232,49 @@ format-foreground = ${right_group.color_1}
 label-indicator-padding = 0
 label-indicator-margin = 0
 
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = "<ramp-load>"
+format-foreground = ${right_group.color_2}
+format-background = ${colors.background}
+
+ramp-load-spacing = 0
+ramp-load-0 = "󰄰 "
+ramp-load-1 = "󰪞 "
+ramp-load-2 = "󰪟 "
+ramp-load-3 = "󰪠 "
+ramp-load-4 = "󰪡 "
+ramp-load-5 = "󰪢 "
+ramp-load-6 = "󰪣 "
+ramp-load-7 = "󰪤 "
+ramp-load-7-foreground = ${colors.alert}
+ramp-load-8 = "󰪥 "
+ramp-load-8-foreground = ${colors.alert}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <ramp-used>
+label = %ramp-used%
+format-foreground = ${right_group.color_2}
+format-background = ${colors.background}
+
+ramp-used-0 = "󰄰 "
+ramp-used-1 = "󰪞 "
+ramp-used-2 = "󰪟 "
+ramp-used-3 = "󰪠 "
+ramp-used-4 = "󰪡 "
+ramp-used-5 = "󰪢 "
+ramp-used-6 = "󰪣 "
+ramp-used-7 = "󰪤 "
+ramp-used-7-foreground = ${colors.alert}
+ramp-used-8 = "󰪥 "
+ramp-used-8-foreground = ${colors.alert}
+
 [module/battery]
 type = internal/battery
-color = ${right_group.color_2}
+color = ${right_group.color_3}
 full-at = 95
 
 ; Use the following command to list batteries and adapters:
@@ -247,7 +287,7 @@ adapter = ${machine.power_adapter}
 poll-interval = 10
 
 format-full = <ramp-capacity><label-full>
-label-full = %percentage%%
+label-full = 
 format-charging = <ramp-capacity><label-charging>
 label-charging = 󰁝 %percentage%%
 format-discharging = <ramp-capacity><label-discharging>
@@ -262,6 +302,7 @@ format-discharging-background = ${colors.background}
 format-discharging-foreground = ${self.color}
 
 ramp-capacity-0 = 󱃍
+ramp-capatity-0-foreground = ${colors.alert}
 ramp-capacity-1 = 󰁺
 ramp-capacity-2 = 󰁻
 ramp-capacity-3 = 󰁼
@@ -271,44 +312,7 @@ ramp-capacity-6 = 󰁾
 ramp-capacity-7 = 󰂀
 ramp-capacity-8 = 󰂁
 ramp-capacity-9 = 󰂂
-ramp-capacity-10 = 󱟢
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = ""
-format = <ramp-load>
-label = %percentage:2%%
-format-foreground = ${right_group.color_3}
-format-background = ${colors.background}
-
-ramp-load-0 = "󰄰 "
-ramp-load-1 = "󰪞 "
-ramp-load-2 = "󰪟 "
-ramp-load-3 = "󰪠 "
-ramp-load-4 = "󰪡 "
-ramp-load-5 = "󰪢 "
-ramp-load-6 = "󰪣 "
-ramp-load-7 = "󰪤 "
-ramp-load-8 = "󰪥 "
-
-[module/memory]
-type = internal/memory
-interval = 2
-format = <ramp-used>
-label = %ramp-used%
-format-foreground = ${right_group.color_3}
-format-background = ${colors.background}
-
-ramp-used-0 = "󰄰 "
-ramp-used-1 = "󰪞 "
-ramp-used-2 = "󰪟 "
-ramp-used-3 = "󰪠 "
-ramp-used-4 = "󰪡 "
-ramp-used-5 = "󰪢 "
-ramp-used-6 = "󰪣 "
-ramp-used-7 = "󰪤 "
-ramp-used-8 = "󰪥 "
+ramp-capacity-10 = 󰁹
 
 [module/rsep1]
 inherit = module/rsep_hard
@@ -343,7 +347,7 @@ interface = ${machine.wireless_interface}
 format-disconnected = %{A1:exec cinnamon-settings network:}󰤮  %{A}
 format-connected = %{A1:exec cinnamon-settings network:}<ramp-signal>%{A}
 label-connected = %essid%
-ramp-signal-0 = "󰤠  "
+ramp-signal-0 = "󰤯  "
 ramp-signal-1 = "󰤟  "
 ramp-signal-2 = "󰤢  "
 ramp-signal-3 = "󰤥  "
