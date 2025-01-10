@@ -30,7 +30,7 @@ highlight = "#89b4fa"
 # Text
 font = "IosevkaTerm NF 11"
 markup = full
-format = "<big><b>%s</b></big>\n%b<small>— <i>%a</i></small>\n"
+format = "<big><b>%s</b></big>\n%b\n<small>— <i>%a</i></small>\n"
 alignment = left
 vertical_alignment = center
 show_age_threshold = -1
