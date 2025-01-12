@@ -17,6 +17,7 @@ declare -A command_descriptions=(
   [jumpapp]="switch or open app"
   [kitty]="terminal emulator"
   [lazygit]="git tui"
+  [mpv]="simple video player"
   [node]=""
   [npm]=""
   [nvim]="neovim"
