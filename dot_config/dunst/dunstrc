@@ -40,7 +40,8 @@ hide_duplicate_count = false
 icon_position = left
 min_icon_size = 54
 max_icon_size = 80
-icon_path = ""
+icon_path = "/home/linus/.icons/Papirus-Dark/"
+enable_recursive_icon_lookup = true
 icon_corner_radius = 4
 
 # Misc/Advanced
