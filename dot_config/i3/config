@@ -52,6 +52,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+x kill
+bindsym $power_mod+x exec xkill
 
 # hide focused window
 bindsym $mod+minus move scratchpad
@@ -62,9 +63,9 @@ bindsym $mod+Tab exec "rofi -modi combi,drun,window -show window"
 bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show combi"
 bindsym $mod+r exec "rofi -show run -modi run"
 bindsym Mod1+F2 exec "rofi -show run -modi run"
-bindsym Mod1+Ctrl+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
+bindsym $power_mod+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
 
-bindsym Mod1+Ctrl+l exec $lock_command
+bindsym $power_mod+l exec $lock_command
 
 # change focus
 bindsym $mod+h focus left
