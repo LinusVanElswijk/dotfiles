@@ -7,18 +7,18 @@
 # Display
 follow = mouse
 {{- if eq .chezmoi.osRelease.idLike "ubuntu debian" }}
-geometry = 350x300-35+35
+geometry = 350x300-15-15
 {{- else }}
 width = 350
 height = (0, 300)
-origin = top-right
-offset = (35, 35)
+origin = bottom-right
+offset = (15, 15)
 {{- end }}
 indicate_hidden = yes
 notification_limit = 5
-gap_size = 12
-padding = 12
-horizontal_padding = 20
+gap_size = 0
+padding = 5
+horizontal_padding = 10
 frame_width = 2
 sort = no
 
@@ -30,6 +30,7 @@ progress_bar_corner_radius = 3
 foreground = "#cdd1dc"
 frame_color = "#89b4fa"
 highlight = "#89b4fa"
+separator_color = frame
 
 # Text
 font = "IosevkaTerm NF 11"
@@ -58,17 +59,17 @@ mouse_middle_click = do_action, close_current
 mouse_right_click = close_all
 
 [urgency_low]
-background = "#1e1e2eb0"
+background = "#1e1e2ecc"
 foreground = "#cdd6f4"
 timeout = 3
 
 [urgency_normal]
-background = "#1e1e2eb0"
+background = "#1e1e2ecc"
 foreground = "#cdd6f4"
 timeout = 3
 
 [urgency_critical]
-background = "#1e1e2e"
+background = "#1e1e2ecc"
 foreground = "#cdd6f4"
 frame_color = "#fab387"
 timeout = 0
