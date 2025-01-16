@@ -6,10 +6,14 @@
 [global]
 # Display
 follow = mouse
+{{- if eq .chezmoi.osRelease.idLike "ubuntu debian" }}
+geometry = 350x300-35+35
+{{- else }}
 width = 350
 height = (0, 300)
 origin = top-right
 offset = (35, 35)
+{{- end }}
 indicate_hidden = yes
 notification_limit = 5
 gap_size = 12
@@ -54,14 +58,14 @@ mouse_middle_click = do_action, close_current
 mouse_right_click = close_all
 
 [urgency_low]
-background = "#1e1e2e"
+background = "#1e1e2eb0"
 foreground = "#cdd6f4"
 timeout = 3
 
 [urgency_normal]
-background = "#1e1e2e"
+background = "#1e1e2eb0"
 foreground = "#cdd6f4"
-timeout = 8
+timeout = 3
 
 [urgency_critical]
 background = "#1e1e2e"
