@@ -231,6 +231,25 @@ mode $mode_move {
 bindsym $mod+m mode $mode_move
 # }}}
 
+# notifications mode {{{
+set $notifications_mode "notifications -- [dx]: dismiss [DX]: dismiss all [h]: history-pop"
+mode $notifications_mode {
+
+    bindsym d exec dunstctl close
+    bindsym x exec dunstctl close
+
+    bindsym Shift+d exec dunstctl close-all; mode "default"
+    bindsym Shift+x exec dunstctl close-all; mode "default"
+
+    bindsym h exec dunstctl history-pop
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+n mode $notifications_mode
+# }}}
+
 # }}}
 # Styling ###################################################################{{{
 
@@ -294,12 +313,6 @@ smart_gaps on
 # Use picom compositor
 exec --no-startup-id picom
 
-# Activate monitors and then add a status bar and wallpaper to them
-exec --no-startup-id sh -c "\
-  autorandr --change && (\
-    ~/.config/i3/scripts/launch_xwinwrap.sh &\
-    ~/.config/polybar/scripts/launch_polybar.sh)"
-
 # Ensure dunst is running
 exec --no-startup-id ~/.config/i3/scripts/ensure_dunst_is_running.sh
 
@@ -312,6 +325,12 @@ exec --no-startup-id dex --autostart --environment i3
 
 # config lock screen
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock_command
+
+# Activate monitors and then add a status bar and wallpaper to them
+exec_always --no-startup-id sh -c "\
+  autorandr --change && (\
+    ~/.config/i3/scripts/launch_xwinwrap.sh &\
+    ~/.config/polybar/scripts/launch_polybar.sh)"
 
 # Enable natural scrolling for touchpad scrolling (intuitive directions)
 exec_always --no-startup-id ~/.config/i3/scripts/enable_touchpad_natural_scrolling.sh
