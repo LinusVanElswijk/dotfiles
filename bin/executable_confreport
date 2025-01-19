@@ -27,6 +27,7 @@ declare -A command_descriptions=(
   [rg]="ripgrep, a better grep command"
   [rofi]="window switcher, application launcher and dmenu replacement"
   [wget]=""
+  [xinput]="used in custom i3 scripts"
   [xwinwrap]="used for desktop background videos"
   [xrandr]=""
   [yazi]="file explorer"
