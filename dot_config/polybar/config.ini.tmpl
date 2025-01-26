@@ -209,7 +209,7 @@ modules =
 ; Right Module Group <<<
 
 [right_group]
-modules = keyboard rsep0_soft cpu memory rsep0_soft battery rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
+modules = keyboard rsep0_soft cpu memory filesystem rsep0_soft battery rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
 color_1 = ${catppuccin.green}
 color_2 = ${catppuccin.mauve}
 color_3 = ${catppuccin.pink}
@@ -271,6 +271,27 @@ ramp-used-7 = "󰪤 "
 ramp-used-7-foreground = ${colors.alert}
 ramp-used-8 = "󰪥 "
 ramp-used-8-foreground = ${colors.alert}
+
+[module/filesystem]
+type = internal/fs
+interval = 30
+format-mounted = <ramp-capacity>
+format-unmounted =
+format-mounted-foreground = ${right_group.color_2}
+format-mounted-background = ${colors.background}
+mount-0 = /
+fixed-values = true
+spacing = 0
+
+ramp-capacity-0 = "󰄰 "
+ramp-capacity-1 = "󰪞 "
+ramp-capacity-2 = "󰪟 "
+ramp-capacity-3 = "󰪠 "
+ramp-capacity-4 = "󰪡 "
+ramp-capacity-5 = "󰪢 "
+ramp-capacity-6 = "󰪣 "
+ramp-capacity-7 = "󰪤 "
+ramp-capacity-8 = "󰪥 "
 
 [module/battery]
 type = internal/battery
