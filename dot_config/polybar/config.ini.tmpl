@@ -209,17 +209,16 @@ modules =
 ; Right Module Group <<<
 
 [right_group]
-modules = keyboard rsep0_soft cpu memory filesystem rsep0_soft battery rsep1 wired-network wireless-network bluetooth pulseaudio rsep2 date rend
+modules = keyboard rsep0_soft cpu memory filesystem rsep0_soft battery rsep1 wired-network wireless-network bluetooth rsep1_soft pulseaudio rsep2 date rend
 color_1 = ${catppuccin.green}
 color_2 = ${catppuccin.mauve}
-color_3 = ${catppuccin.pink}
+color_3 = ${catppuccin.sky}
 color_4 = ${catppuccin.blue}
 
 [module/rsep0_soft]
 inherit = module/rsep_soft
 content-background = ${colors.background}
 content-foreground = ${colors.foreground}
-
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -308,7 +307,7 @@ adapter = ${machine.power_adapter}
 poll-interval = 10
 
 format-full = <ramp-capacity><label-full>
-label-full = 
+label-full =
 format-charging = <ramp-capacity><label-charging>
 label-charging = 󰁝 %percentage%%
 format-discharging = <ramp-capacity><label-discharging>
@@ -339,6 +338,11 @@ ramp-capacity-10 = 󰁹
 inherit = module/rsep_hard
 content-background = ${colors.background}
 content-foreground = ${colors.background-alt}
+
+[module/rsep1_soft]
+inherit = module/rsep_soft
+content-background = ${colors.background-alt}
+content-foreground = ${colors.background}
 
 [module/network]
 type = internal/network
