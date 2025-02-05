@@ -1,0 +1,127 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """\
+[](blue)\
+$os\
+$username\
+[](fg:blue bg:surface1)\
+$directory\
+[](fg:surface1 bg:blue)\
+$git_branch\
+$git_status\
+[](fg:blue)\
+$fill\
+$status\
+$cmd_duration\
+$time\
+$line_break$sudo$character"""
+
+palette = 'catppuccin_mocha'
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[os]
+disabled = false
+style = "bg:blue fg:base"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = ""
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = true
+style_user = "bg:blue fg:base bold"
+style_root = "bg:blue fg:base bold"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:blue bg:surface1 bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "fg:base bg:blue bold"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "fg:base bg:blue bold"
+format = '[($all_status$ahead_behind )]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "fg:blue italic"
+format = '[  $time ]($style)'
+
+[cmd_duration]
+min_time = 500
+format = '[  $duration ](italic yellow)' 
+
+[status]
+style = 'fg:red italic'
+symbol = ' '
+format = '[$symbol $common_meaning$signal_name$maybe_int ]($style) '
+disabled = false
+
+[line_break]
+disabled = false
+
+[character]
+format = "$symbol "
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[fill]
+symbol = ' '
+
+[sudo]
+format = "[$symbol]($style)"
+style = "fg:green bold"
+symbol = "sudo"
+disabled = false
