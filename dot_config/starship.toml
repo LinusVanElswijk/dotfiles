@@ -1,19 +1,23 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """\
-[](blue)\
-$os\
+[](mantle)\
+$shell\
 $username\
-[](fg:blue bg:surface1)\
+[](fg:mantle bg:blue)\
 $directory\
-[](fg:surface1 bg:blue)\
+[](fg:blue bg:teal)\
 $git_branch\
 $git_status\
-[](fg:blue)\
-$fill\
+[](fg:teal bg:mantle)\
+$git_state\
+[](fg:mantle)\
+(    \
+[](mantle)\
 $status\
 $cmd_duration\
 $time\
+[](fg:mantle))\
 $line_break$sudo$character"""
 
 palette = 'catppuccin_mocha'
@@ -48,62 +52,86 @@ crust = "#11111b"
 
 [os]
 disabled = false
-style = "bg:blue fg:base"
+style = "bg:blue fg:mantle"
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = ""
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
+Windows = "󰍲 "
+Ubuntu = "󰕈 "
+SUSE = " "
+Raspbian = "󰐿 "
+Mint = "󰣭 "
+Macos = " "
+Manjaro = " "
+Linux = "󰌽 "
+Gentoo = "󰣨 "
+Fedora = "󰣛 "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+Artix = "󰣇 "
+CentOS = " "
+Debian = "󰣚 "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+
+[shell]
+fish_indicator = ' '
+style = 'fg:text bg:mantle bold'
+disabled = false
+format = '[$indicator]($style)'
 
 [username]
 show_always = true
-style_user = "bg:blue fg:base bold"
-style_root = "bg:blue fg:base bold"
+style_user = "bg:mantle fg:text bold"
+style_root = "bg:mantle fg:text bold"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:blue bg:surface1 bold"
+style = "fg:mantle bg:blue bold"
+repo_root_style = "fg:mantle bg:blue bold underline"
 format = "[ $path ]($style)"
+repo_root_format = "[ ]($style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[ ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+truncate_to_repo = false
 
 [git_branch]
-symbol = ""
-style = "fg:base bg:blue bold"
-format = '[ $symbol $branch ]($style)'
+style = "fg:mantle bg:teal bold"
+format = '[ $branch ]($style)'
 
 [git_status]
-style = "fg:base bg:blue bold"
-format = '[($all_status$ahead_behind )]($style)'
+conflicted = "󰳧 "
+ahead = " "
+behind = " "
+diverged = "󱞿 "
+up_to_date = ""
+untracked = " "
+stashed = "󱊖 "
+modified = "󰜥 "
+staged = " "
+renamed = " "
+deleted = " "
+typechanged = ""
+style = "fg:mantle bg:teal bold"
+format = '[($all_status$ahead_behind)]($style)'
+
+[git_state]
+style = "fg:teal bg:mantle bold"
+format ="[ $state( $progress_current/$progress_total) ]($style)"
 
 [time]
 disabled = false
 time_format = "%R"
-style = "fg:blue italic"
-format = '[  $time ]($style)'
+style = "fg:blue bg:mantle italic"
+format = '[  $time]($style)'
 
 [cmd_duration]
 min_time = 500
-format = '[  $duration ](italic yellow)' 
+format = '[  $duration ](italic fg:yellow bg:mantle)' 
 
 [status]
-style = 'fg:red italic'
+style = 'fg:red bg:mantle italic'
 symbol = ' '
 format = '[$symbol $common_meaning$signal_name$maybe_int ]($style) '
 disabled = false
@@ -112,7 +140,7 @@ disabled = false
 disabled = false
 
 [character]
-format = "$symbol "
+format = " $symbol "
 success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
