@@ -32,10 +32,13 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "0"
 
-for_window [class="^lazygit-float$"] floating enable
-for_window [class="^lazygit-float$"] resize set 95 ppt 90 ppt
-for_window [class="^lazygit-float$"] move position center
+# }}}
+# Windows ###################################################################{{{
 
+for_window [class="-kittyfloat"] floating enable, resize set 95 ppt 90 ppt, move position center
+for_window [class="^cinnamon-settings"] floating enable, resize set 731 px 670 px, move position center
+for_window [class="^Blueman-manager"] floating enable, resize set 602 px 500 px, move position center
+for_window [class="^Pavucontrol"] floating enable, resize set 602 px 1000 px, move position center
 
 # }}}
 # Key-bindings ##############################################################{{{
