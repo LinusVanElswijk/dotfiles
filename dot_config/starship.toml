@@ -133,7 +133,7 @@ format = '[  $duration ](italic fg:yellow bg:mantle)'
 [status]
 style = 'fg:red bg:mantle italic'
 symbol = ' '
-format = '[$symbol $common_meaning$signal_name$maybe_int ]($style) '
+format = '[$symbol $common_meaning$signal_name$maybe_int ]($style)'
 disabled = false
 
 [line_break]
