@@ -1,0 +1,7 @@
+[flavor]
+dark = "catppuccin-mocha"
+
+[manager]
+find_keyword  = { fg = "#eed49f", underline = true }
+marker_selected = { fg = "#cdd6f4", bg = "#cdd6f4" }
+
