@@ -1,4 +1,5 @@
 flavors/
 flavors/**
 
-package.toml
+plugins/
+plugins/**
