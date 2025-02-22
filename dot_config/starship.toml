@@ -8,10 +8,13 @@ $username\
 $directory\
 [](fg:blue bg:teal)\
 $git_branch\
-$git_status\
 [](fg:teal bg:mantle)\
 $git_state\
 [](fg:mantle)\
+(    \
+[](mantle)\
+$git_status\
+[](fg:mantle))\
 (    \
 [](mantle)\
 $status\
@@ -101,30 +104,20 @@ style = "fg:mantle bg:teal bold"
 format = '[ $branch ]($style)'
 
 [git_status]
-conflicted = "󰳧 "
-ahead = " "
-behind = " "
-diverged = "󱞿 "
-up_to_date = ""
-untracked = " "
-stashed = "󱊖 "
-modified = "󰜥 "
-staged = " "
-renamed = " "
-deleted = " "
+ahead = "[ ](fg:green bg:mantle)"
+behind = "[ ](fg:yellow bg:mantle)"
+diverged = "[ ](fg:yellow bg:mantle)[󱦴 ](fg:red bg:mantle)"
+up_to_date = "[ ](fg:green bg:mantle)"
+conflicted = "[$count󰳧 ](fg:red bg:mantle)"
+untracked = "[$count ](fg:red bg:mantle)"
+staged = "[$count ](fg:green bg:mantle)"
+renamed = "[$count ](fg:green bg:mantle)"
+modified = "[$count󰜥 ](fg:red bg:mantle)"
+deleted = "[$count ](fg:red bg:mantle)"
 typechanged = ""
-style = "fg:mantle bg:teal bold"
-format = '[($all_status$ahead_behind)]($style)'
-
-[git_state]
+stashed = "[󱊖 ](fg:subtext0 bg:mantle)"
 style = "fg:teal bg:mantle bold"
-format ="[ $state( $progress_current/$progress_total) ]($style)"
-
-[time]
-disabled = false
-time_format = "%R"
-style = "fg:blue bg:mantle italic"
-format = '[  $time]($style)'
+format = '[  ($ahead_behind )([|](fg:surface1 bg:mantle)( $untracked)( $conflicted)( $staged$renamed$modified$deleted))([|](fg:surface1 bg:mantle) $stashed )]($style)'
 
 [cmd_duration]
 min_time = 500
