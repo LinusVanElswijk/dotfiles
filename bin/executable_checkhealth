@@ -26,6 +26,7 @@ declare -A command_descriptions=(
   [python3]=""
   [rg]="ripgrep, a better grep command"
   [rofi]="window switcher, application launcher and dmenu replacement"
+  [starship]="terminal prompt"
   [wget]=""
   [xinput]="used in custom i3 scripts"
   [xwinwrap]="used for desktop background videos"
