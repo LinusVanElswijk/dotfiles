@@ -15,6 +15,7 @@ declare -A command_descriptions=(
   [fzf]="fuzzy finder"
   [git]=""
   [jumpapp]="switch or open app"
+  [keychain]=""
   [kitty]="terminal emulator"
   [lazygit]="git tui"
   [mpv]="simple video player"
