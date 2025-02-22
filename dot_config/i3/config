@@ -7,6 +7,7 @@
 
 set $mod Mod4
 set $power_mod Ctrl+Mod1
+set $launch_mod Mod4+Mod1
 
 set $lock_command "i3lock --nofork --show-failed-attempts --show-keyboard-layout --color 24273a 󰇘/.config/i3/scripts"
 
@@ -253,6 +254,14 @@ mode $notifications_mode {
 bindsym $mod+n mode $notifications_mode
 # }}}
 
+bindsym $launch_mod+v exec jumpapp -R -c Bitwarden exec /usr/bin/flatpak run --branch=stable --arch=x86_64 com.bitwarden.desktop
+bindsym $launch_mod+m exec jumpapp thunderbird
+bindsym $launch_mod+f exec jumpapp firefox
+
+bindsym $mod+Ctrl+r exec i3-input -F 'rename workspace to "%s"' -P 'Workspace Name: ' -f 'pango:IosevkaTerm NF SemiBold 16'
+bindsym $mod+Ctrl+c exec i3-input -F 'workspace "%s"' -P 'Create Named Workspace:  ' -f 'pango:IosevkaTerm NF SemiBold 16'
+bindsym $mod+Ctrl+m exec i3-input -F 'move container to workspace "%s"' -P 'Move to Workspace:  ' -f 'pango:IosevkaTerm NF SemiBold 16'
+
 # }}}
 # Styling ###################################################################{{{
 
@@ -320,7 +329,7 @@ exec --no-startup-id picom
 exec --no-startup-id ~/.config/i3/scripts/ensure_dunst_is_running.sh
 
 # Keyboard layout settings
-exec --no-startup-id setxkbmap -layout us,us -variant ,dvorak -option grp:alt_space_toggle
+exec --no-startup-id setxkbmap -layout us -variant dvorak -option caps:escape
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
