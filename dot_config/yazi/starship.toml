@@ -1,0 +1,82 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """\
+[](blue)\
+$directory\
+[](fg:blue bg:surface1)\
+$git_branch\
+[](fg:surface1)\
+$fill\
+([](surface1)\
+[](surface1))\
+([](teal)\
+[ ( $git_state)](fg:surface1 bg:teal)\
+[](fg:teal bg:surface1)\
+$git_status\
+[](surface1))"""
+
+palette = 'catppuccin_mocha'
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[directory]
+style = "fg:surface1 bg:blue bold"
+repo_root_style = "fg:mantle bg:blue bold underline"
+format = "[$path]($style)"
+repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)"
+truncation_length = 6
+truncation_symbol = "…/"
+truncate_to_repo = false
+
+[git_branch]
+style = "fg:teal bg:surface1 bold"
+format = '[ 󰘬 $branch]($style)'
+
+[git_status]
+ahead = "[ $count](fg:green bg:surface1)"
+behind = "[ $count](fg:yellow bg:surface1)"
+diverged = "[ $behind_count](fg:yellow bg:surface1)[ $count](fg:red bg:surface1)"
+up_to_date = "[ ](fg:green bg:surface1)"
+conflicted = "[$count󰳧 ](fg:red bg:surface1)"
+untracked = "[$count ](fg:red bg:surface1)"
+staged = "[$count ](fg:green bg:surface1)"
+renamed = "[$count ](fg:green bg:surface1)"
+modified = "[$count󰜥 ](fg:red bg:surface1)"
+deleted = "[$count ](fg:red bg:surface1)"
+typechanged = ""
+stashed = "[󱊖 ](fg:subtext0 bg:surface1)"
+style = "fg:teal bg:surface1 bold"
+format = '[ ($ahead_behind)([|](fg:mantle bg:surface1)( $untracked)( $conflicted)( $staged$renamed$modified$deleted))([|](fg:mantle bg:surface1)$stashed )]($style)'
+
+[git_state]
+style = "bg:teal bg:surface1 bold"
+format = "[$state( $progress_current/$progress_total)]($style)"
+
+[fill]
+symbol = ' '

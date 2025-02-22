@@ -1,8 +1,11 @@
 [plugin]
-deps = [{ use = "Rolv-Apneseth/starship", rev = "d1cd0a3" }, { use = "dedukun/relative-motions", rev = "0d9c8cf" }]
+deps = [
+  { use = "dedukun/relative-motions", rev = "0d9c8cf" },
+  { use = "Rolv-Apneseth/starship", rev = "d1cd0a3" },
+]
 
 [flavor]
 deps = [
-  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "302c0d5" },
   { use = "yazi-rs/flavors:catppuccin-latte", rev = "302c0d5" },
+  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "302c0d5" },
 ]
