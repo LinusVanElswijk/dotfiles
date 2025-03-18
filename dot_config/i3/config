@@ -67,7 +67,9 @@ bindsym $mod+Tab exec "rofi -modi combi,drun,window -show window"
 bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show combi"
 bindsym $mod+r exec "rofi -show run -modi run"
 bindsym Mod1+F2 exec "rofi -show run -modi run"
+bindsym $power_mod+Home exec "~/.config/rofi/scripts/rofi-keyboard-menu"
 bindsym $power_mod+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
+bindsym $power_mod+b exec "~/.config/rofi/scripts/rofi-bluetooth"
 
 bindsym $power_mod+l exec $lock_command
 
@@ -160,12 +162,16 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+# Use pactl to for media control
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/pactl_volume.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/pactl_volume.sh down
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+XF86AudioRaiseVolume exec ~/.config/i3/scripts/play_test_sound.sh
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # resize mode {{{
 set $mode_resize "resize -- [hjkl]: focus  <shift>: adjust  [x]: kill  [-]: hide"

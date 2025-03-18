@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+declare -A layouts=(
+  ["dvorak (caps-escape)"]="setxkbmap -layout us -variant dvorak -option caps-escape"
+  ["dvorak (capslock)"]="setxkbmap -layout us -variant dvorak"
+  ["qwerty (caps-escape)"]="setxkbmap -layout us -option caps-escape"
+  ["qwerty (capslock)"]="setxkbmap -layout us"
+)
+
+choice=$(printf "%s\n" "${!layouts[@]}" | rofi -dmenu -p "Select Layout")
+
+[ -n "$choice" ] && ${layouts[$choice]}
+
