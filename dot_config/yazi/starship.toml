@@ -10,8 +10,9 @@ $fill\
 ([](surface1)\
 [](surface1))\
 ([](teal)\
-[ ( $git_state)](fg:surface1 bg:teal)\
+[ ](fg:surface1 bg:teal)\
 [](fg:teal bg:surface1)\
+$git_state\
 $git_status\
 [](surface1))"""
 
@@ -75,8 +76,8 @@ style = "fg:teal bg:surface1 bold"
 format = '[ ($ahead_behind)([|](fg:mantle bg:surface1)( $untracked)( $conflicted)( $staged$renamed$modified$deleted))([|](fg:mantle bg:surface1)$stashed )]($style)'
 
 [git_state]
-style = "bg:teal bg:surface1 bold"
-format = "[$state( $progress_current/$progress_total)]($style)"
+style = "bg:surface1 fg:peach bold"
+format = "[ $state( $progress_current/$progress_total)]($style)"
 
 [fill]
 symbol = ' '

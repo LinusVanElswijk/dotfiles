@@ -9,11 +9,12 @@ $directory\
 [](fg:blue bg:teal)\
 $git_branch\
 [](fg:teal bg:mantle)\
-$git_state\
 [](fg:mantle)\
 (    \
 [](mantle)\
+[  ](bg:mantle fg:teal)\
 $git_status\
+([| $git_state](bg:mantle fg:surface1))\
 [](fg:mantle))\
 (    \
 [](mantle)\
@@ -117,7 +118,11 @@ deleted = "[$count ](fg:red bg:mantle)"
 typechanged = ""
 stashed = "[󱊖 ](fg:subtext0 bg:mantle)"
 style = "fg:teal bg:mantle bold"
-format = '[  ($ahead_behind )([|](fg:surface1 bg:mantle)( $untracked)( $conflicted)( $staged$renamed$modified$deleted))([|](fg:surface1 bg:mantle) $stashed )]($style)'
+format = '[($ahead_behind )([|](fg:surface1 bg:mantle)( $untracked)( $conflicted)( $staged$renamed$modified$deleted))([|](fg:surface1 bg:mantle) $stashed )]($style)'
+
+[git_state]
+style = "fg:peach bg:mantle bold"
+format = "[$state( $progress_current/$progress_total)]($style)"
 
 [cmd_duration]
 min_time = 500
