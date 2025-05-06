@@ -3,3 +3,5 @@ flavors/**
 
 plugins/
 plugins/**
+
+package.toml
