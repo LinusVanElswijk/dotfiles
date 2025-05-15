@@ -173,6 +173,8 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh down
 # resize mode {{{
 set $mode_resize "resize -- [hjkl]: focus  <shift>: adjust  [x]: kill  [-]: hide"
 mode $mode_resize {
