@@ -14,7 +14,7 @@ while IFS= read -r monitor; do
     geometry="${width}x${height}+${offset_x}+${offset_y}"
 
     xwinwrap -ov -g $geometry --\
-      mpv -wid WID "$HOME/.local/share/backgrounds/winter-forest.1920x1080.mp4"\
+      mpv -wid WID "$HOME/.local/share/backgrounds/corgi-sleeping.1920x1080.mp4"\
         --no-osc\
         --no-osd-bar\
         --speed=1.0\
