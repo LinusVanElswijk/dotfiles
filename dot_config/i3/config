@@ -18,20 +18,22 @@ set $monitor1 HDMI-1 DP-1 eDP-1
 set $monitor2 DP-1 eDP-1
 set $monitor3 eDP-1
 
-
 # }}}
 # Workspaces ################################################################{{{
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
+set $ws1 "1: terminal"
+set $ws2 "2: browser"
+set $ws3 "3: communication"
+
+set $ws4 "4: focus"
+set $ws5 "5: aside"
+set $ws6 "6: music"
+
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "0"
+
+set $ws10 "0: monitoring"
 
 # }}}
 # Windows ###################################################################{{{
