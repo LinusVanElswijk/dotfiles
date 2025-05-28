@@ -50,6 +50,7 @@ assign [class="^thunderbird$"] $ws3
 assign [class="^Signal$"] $ws3
 
 for_window [class="-kittyfloat"] floating enable, resize set 95 ppt 90 ppt, move position center
+for_window [class="^Bitwarden$"] floating enable, resize set 33 ppt 90 ppt, move position right
 for_window [class="^cinnamon-settings"] floating enable, resize set 731 px 670 px, move position center
 for_window [class="^Blueman-manager"] floating enable, resize set 602 px 500 px, move position center
 for_window [class="^Pavucontrol"] floating enable, resize set 602 px 1000 px, move position center
@@ -276,9 +277,7 @@ mode $notifications_mode {
 bindsym $mod+n mode $notifications_mode
 # }}}
 
-bindsym $launch_mod+v exec jumpapp -R -c Bitwarden exec /usr/bin/flatpak run --branch=stable --arch=x86_64 com.bitwarden.desktop
-bindsym $launch_mod+m exec jumpapp thunderbird
-bindsym $launch_mod+f exec jumpapp firefox
+bindsym $power_mod+w exec jumpapp -R -c Bitwarden exec /usr/bin/flatpak run --branch=stable --arch=x86_64 com.bitwarden.desktop
 
 bindsym $mod+Ctrl+r exec i3-input -F 'rename workspace to "%s"' -P 'Workspace Name: ' -f 'pango:IosevkaTerm NF SemiBold 16'
 bindsym $mod+Ctrl+c exec i3-input -F 'workspace "%s"' -P 'Create Named Workspace:  ' -f 'pango:IosevkaTerm NF SemiBold 16'
