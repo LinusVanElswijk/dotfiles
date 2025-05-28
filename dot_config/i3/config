@@ -48,6 +48,7 @@ assign [class="^kitty$"] $ws1
 assign [class="^firefox$"] $ws2
 assign [class="^thunderbird$"] $ws3
 assign [class="^Signal$"] $ws3
+assign [class="^firefox-music$"] $ws6
 
 for_window [class="-kittyfloat"] floating enable, resize set 95 ppt 90 ppt, move position center
 for_window [class="^Bitwarden$"] floating enable, resize set 33 ppt 90 ppt, move position right
@@ -142,7 +143,7 @@ bindsym $mod+2 workspace number $ws2; exec --no-startup-id jumpapp -w firefox
 bindsym $mod+3 workspace number $ws3; exec --no-startup-id jumpapp -R thunderbird; exec --no-startup-id jumpapp -R signal
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
+bindsym $mod+6 workspace number $ws6; exec --no-startup-id jumpapp -w -c firefox-music firefox -P Music --name "Firefox Music" --class firefox-music --private-window www.youtube.com
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
