@@ -7,7 +7,7 @@ MUTE_STATE=$(pactl get-sink-mute @DEFAULT_SINK@ | cut -d' ' -f2)
 set_volume() {
   local volume=$1
   pactl set-sink-volume @DEFAULT_SINK@ "${volume}%"
-  notify-send --urgency low --expire-time 1000 "Volume ${volume}%"
+  notify-send --urgency=low --expire-time=1000 "Volume ${volume}%" --app-name "i3" --hint=string:x-canonical-private-synchronous:volume
 }
 
 next_stop() {
