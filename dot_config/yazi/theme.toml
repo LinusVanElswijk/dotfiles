@@ -2,7 +2,7 @@
 light = "catppuccin-latte"
 dark = "catppuccin-mocha"
 
-[manager]
+[mgr]
 find_keyword  = { fg = "#eed49f", underline = true }
 marker_selected = { fg = "#cdd6f4", bg = "#cdd6f4" }
 
