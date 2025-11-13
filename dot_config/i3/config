@@ -22,12 +22,12 @@ set $ws3 "3: communication"
 set $ws4 "4: focus"
 set $ws5 "5: aside"
 set $ws6 "6: music"
-
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
+set $ws10 "10: notes"
 
-set $ws10 "0: monitoring"
+set $wsBitwarden "bitwarden"
 
 # }}}
 # Monitors ##################################################################{{{
@@ -42,6 +42,9 @@ workspace $ws3 output $monitor1
 workspace $ws4 output $monitor1
 workspace $ws5 output $monitor1
 workspace $ws6 output $monitor1
+workspace $ws10 output $monitor1
+
+workspace $wsBitwarden output $monitor2
 
 # }}}
 # Windows ###################################################################{{{
@@ -52,13 +55,16 @@ assign [class="^zen$"] $ws2
 assign [class="^thunderbird$"] $ws3
 assign [class="^Signal$"] $ws3
 assign [class="^firefox-music$"] $ws6
+assign [class="^obsidian$"] $ws10
+
+assign [class="^bitwarden$"] $wsBitwarden
 
 for_window [class="-kittyfloat"] floating enable, resize set 95 ppt 90 ppt, move position center
-for_window [class="^Bitwarden$"] floating enable, resize set 33 ppt 90 ppt, move position right
 for_window [class="^cinnamon-settings"] floating enable, resize set 731 px 670 px, move position center
 for_window [class="^Blueman-manager"] floating enable, resize set 602 px 500 px, move position center
 for_window [class="^Pavucontrol"] floating enable, resize set 602 px 1000 px, move position center
 for_window [class="^com.github.th_ch.youtube_music$"] floating enable, resize set 500 px 700 px, move position center
+for_window [class="^zen$" title=".*Private Browsing.*"] move to workspace number 6
 
 # }}}
 # Key-bindings ##############################################################{{{
@@ -148,27 +154,27 @@ bindsym $mod+i focus mode_toggle
 # switch to workspace
 bindsym $mod+1 workspace number $ws1; exec --no-startup-id jumpapp -w kitty
 bindsym $mod+2 workspace number $ws2; exec --no-startup-id jumpapp -w zen
-bindsym $mod+3 workspace number $ws3; exec --no-startup-id jumpapp -R thunderbird; exec --no-startup-id jumpapp -R signal-desktop
+bindsym $mod+3 workspace number $ws3; exec --no-startup-id jumpapp -R thunderbird; exec --no-startup-id jumpapp -R signal-desktop --password-store="gnome-libsecret"
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $Ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 workspace number $ws10 exec --no-startup-id jumpapp -w obsidian
 
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6; workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # move focused workspace to monitor
 bindsym $mod+Ctrl+h move workspace to output left
@@ -291,11 +297,13 @@ mode $notifications_mode {
 bindsym $mod+n mode $notifications_mode
 # }}}
 
-bindsym $power_mod+w exec jumpapp -R -c Bitwarden exec /usr/bin/flatpak run --branch=stable --arch=x86_64 com.bitwarden.desktop
+bindsym $launch_mod+1 exec jumpapp -R -c Bitwarden exec /usr/bin/flatpak run --branch=stable --arch=x86_64 com.bitwarden.desktop
 
 bindsym $mod+Ctrl+r exec i3-input -F 'rename workspace to "%s"' -P 'Workspace Name: ' -f 'pango:IosevkaTerm NF SemiBold 16'
 bindsym $mod+Ctrl+c exec i3-input -F 'workspace "%s"' -P 'Create Named Workspace:  ' -f 'pango:IosevkaTerm NF SemiBold 16'
 bindsym $mod+Ctrl+m exec i3-input -F 'move container to workspace "%s"' -P 'Move to Workspace:  ' -f 'pango:IosevkaTerm NF SemiBold 16'
+
+bindsym $mod+p exec flameshot gui
 
 # }}}
 # Styling ###################################################################{{{
@@ -385,7 +393,7 @@ exec_always --no-startup-id sh -c "\
     ~/.config/i3/scripts/launch_xwinwrap.sh &\
     ~/.config/polybar/scripts/launch_polybar.sh)"
 
-# Enable natural scrolling for touchpad scrolling (intuitive directions)
-exec_always --no-startup-id ~/.config/i3/scripts/enable_touchpad_natural_scrolling.sh
+# Configure the touchpad
+exec_always --no-startup-id ~/.config/i3/scripts/configure_touchpad_behavior.sh
 
 # }}}
