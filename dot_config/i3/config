@@ -13,6 +13,7 @@ set $lock_command "i3lock --nofork --show-failed-attempts --show-keyboard-layout
 
 focus_follows_mouse no
 
+
 # }}}
 # Workspaces ################################################################{{{
 
@@ -33,6 +34,7 @@ set $wsBitwarden "bitwarden"
 # Monitors ##################################################################{{{
 
 set $monitor1 HDMI-1 DP-1 eDP-1
+
 set $monitor2 DP-1 eDP-1
 set $monitor3 eDP-1
 
@@ -69,6 +71,8 @@ for_window [class="^zen$" title=".*Private Browsing.*"] move to workspace number
 # }}}
 # Key-bindings ##############################################################{{{
 
+set $mod Mod4
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -76,82 +80,7 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
-# kill focused window
-bindsym $mod+x kill
-bindsym $power_mod+x exec xkill
-
-# hide focused window
-bindsym $mod+minus move scratchpad
-bindsym $mod+d move scratchpad
-
-# rofi menus
-bindsym $mod+space exec "rofi -modi combi,drun,window -show drun"
-bindsym $mod+Tab exec "rofi -modi combi,drun,window -show window"
-bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show combi"
-bindsym $mod+r exec "rofi -show run -modi run"
-bindsym Mod1+F2 exec "rofi -show run -modi run"
-bindsym $power_mod+Home exec "~/.config/rofi/scripts/rofi-keyboard-menu"
-bindsym $power_mod+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
-bindsym $power_mod+b exec "~/.config/rofi/scripts/rofi-bluetooth"
-
-bindsym $power_mod+l exec $lock_command
-
-# music control
-bindsym $power_mod+m exec jumpapp -Rc "com.github.th_ch.youtube_music" "youtube-music"
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+z split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+i floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+i focus mode_toggle
-
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
+# workspaces
 bindsym $mod+1 workspace number $ws1; exec --no-startup-id jumpapp -w kitty
 bindsym $mod+2 workspace number $ws2; exec --no-startup-id jumpapp -w zen
 bindsym $mod+3 workspace number $ws3; exec --no-startup-id jumpapp -R thunderbird; exec --no-startup-id jumpapp -R signal-desktop --password-store="gnome-libsecret"
@@ -161,10 +90,8 @@ bindsym $mod+6 workspace number $Ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10 exec --no-startup-id jumpapp -w obsidian
+bindsym $mod+0 workspace number $ws10; exec --no-startup-id jumpapp -w obsidian
 
-
-# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -176,7 +103,82 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# move focused workspace to monitor
+# focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left  focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up    focus up
+bindsym $mod+Down  focus down
+
+# move
+set $move_step_size 200 px
+
+bindsym $mod+Shift+h move left $move_step_size
+bindsym $mod+Shift+j move down $move_step_size
+bindsym $mod+Shift+k move up $move_step_size
+bindsym $mod+Shift+l move right $move_step_size
+
+bindsym $mod+Shift+Left  move left $move_step_size
+bindsym $mod+Shift+Right move right $move_step_size
+bindsym $mod+Shift+Up    move up $move_step_size
+bindsym $mod+Shift+Down  move down $move_step_size
+
+# resize
+set $resize_step_size 100 px or 10 ppt
+
+bindsym $mod+Home exec "\
+  i3-msg resize shrink right $resize_step_size ||\
+  i3-msg resize shrink down $resize_step_size ||\
+  i3-msg resize grow left $resize_step_size ||\
+  i3-msg resize grow up $resize_step_size\
+"
+bindsym $mod+End exec "\
+  i3-msg resize grow right $resize_step_size ||\
+  i3-msg resize grow down $resize_step_size ||\
+  i3-msg resize shrink left $resize_step_size ||\
+  i3-msg resize shrink up $resize_step_size\
+"
+
+bindsym Shift+$mod+Home exec "\
+  i3-msg resize shrink down $resize_step_size ||\
+  i3-msg resize shrink right $resize_step_size ||\
+  i3-msg resize grow up $resize_step_size ||\
+  i3-msg resize grow left $resize_step_size\
+"
+bindsym Shift+$mod+End exec "\
+  i3-msg resize grow down $resize_step_size ||\
+  i3-msg resize grow right $resize_step_size ||\
+  i3-msg resize shrink up $resize_step_size ||\
+  i3-msg resize shrink left $resize_step_size\
+"
+
+# layout toggle
+bindsym $mod+z layout toggle tabbed split
+
+# floating
+bindsym $mod+Shift+t floating toggle
+bindsym $mod+t focus mode_toggle
+bindsym $mod+Button1 move
+bindsym $mod+Button3 resize
+
+# close
+bindsym $mod+q kill
+bindsym $mod+x kill
+bindsym $power_mod+x exec xkill
+
+# minimize/maximize
+bindsym $mod+d move scratchpad
+bindsym $mod+f fullscreen toggle
+
+# minimize/maximize
+bindsym $mod+v split vertical
+bindsym Shift+$mod+v split horizontal
+
+# move workspaces 
 bindsym $mod+Ctrl+h move workspace to output left
 bindsym $mod+Ctrl+j move workspace to output down
 bindsym $mod+Ctrl+k move workspace to output up
@@ -186,6 +188,28 @@ bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Ctrl+Down move workspace to output down
 bindsym $mod+Ctrl+Up move workspace to output up
 bindsym $mod+Ctrl+Right move workspace to output right
+
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# rofi menus
+bindsym $mod+space exec "rofi -modi combi,drun,window -show drun"
+bindsym $mod+Tab exec "rofi -modi combi,drun,window -show window"
+# bindsym $mod+Shift+space exec "rofi -modi combi,drun,window -show combi"
+# bindsym $mod+r exec "rofi -show run -modi run"
+bindsym $power_mod+Home exec "~/.config/rofi/scripts/rofi-keyboard-menu"
+bindsym $power_mod+End exec "rofi -show powermenu -modi powermenu:~/.config/rofi/scripts/rofi-power-menu"
+bindsym $power_mod+b exec "~/.config/rofi/scripts/rofi-bluetooth"
+
+bindsym $power_mod+l exec $lock_command
+
+# music control
+bindsym $power_mod+m exec jumpapp -Rc "com.github.th_ch.youtube_music" "youtube-music"
+
+
+
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -210,73 +234,6 @@ bindsym $power_mod+XF86AudioMute exec playerctl play-pause
 
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh down
-# resize mode {{{
-set $mode_resize "resize -- [hjkl]: focus  <shift>: adjust  [x]: kill  [-]: hide"
-mode $mode_resize {
-    bindsym h focus left
-    bindsym j focus down
-    bindsym k focus up
-    bindsym l focus right
-
-    bindsym Left focus left
-    bindsym Down focus down
-    bindsym Up focus up
-    bindsym Right focus right
-
-    bindsym Shift+h resize shrink width 10 px or 10 ppt
-    bindsym Shift+j resize grow height 10 px or 10 ppt
-    bindsym Shift+k resize shrink height 10 px or 10 ppt
-    bindsym Shift+l resize grow width 10 px or 10 ppt
-
-    bindsym Shift+Left resize shrink width 10 px or 10 ppt
-    bindsym Shift+Down resize grow height 10 px or 10 ppt
-    bindsym Shift+Up resize shrink height 10 px or 10 ppt
-    bindsym Shift+Right resize grow width 10 px or 10 ppt
-
-    bindsym x kill
-    bindsym minus move scratchpad
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+s mode $mode_resize
-# }}}
-
-
-# move mode {{{
-set $mode_move "move -- [hjkl]: focus  [0-9]: move window  [x]: kill  [-]: hide"
-mode $mode_move {
-    bindsym h focus left
-    bindsym j focus down
-    bindsym k focus up
-    bindsym l focus right
-
-    bindsym Left focus left
-    bindsym Down focus down
-    bindsym Up focus up
-    bindsym Right focus right
-
-    bindsym 1 move container to workspace number $ws1;
-    bindsym 2 move container to workspace number $ws2;
-    bindsym 3 move container to workspace number $ws3;
-    bindsym 4 move container to workspace number $ws4;
-    bindsym 5 move container to workspace number $ws5;
-    bindsym 6 move container to workspace number $ws6;
-    bindsym 7 move container to workspace number $ws7;
-    bindsym 8 move container to workspace number $ws8;
-    bindsym 9 move container to workspace number $ws9;
-    bindsym 0 move container to workspace number $ws10;
-
-    bindsym x kill
-    bindsym minus move scratchpad
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+m mode $mode_move
-# }}}
 
 # notifications mode {{{
 set $notifications_mode "notifications -- [dx]: dismiss [DX]: dismiss all [h]: history-pop"
@@ -388,10 +345,8 @@ exec --no-startup-id ~/.config/i3/scripts/i3-battery-popup.sh -n
 exec --no-startup-id ~/.config/i3/scripts/media_notifier.sh
 
 # Activate monitors and then add a status bar and wallpaper to them
-exec_always --no-startup-id sh -c "\
-  autorandr --change && (\
-    ~/.config/i3/scripts/launch_xwinwrap.sh &\
-    ~/.config/polybar/scripts/launch_polybar.sh)"
+exec --no-startup-id ~/.config/i3/scripts/detect_monitor_change.sh
+exec_always --no-startup-id ~/.config/i3/scripts/redecorate_monitors.sh
 
 # Configure the touchpad
 exec_always --no-startup-id ~/.config/i3/scripts/configure_touchpad_behavior.sh
