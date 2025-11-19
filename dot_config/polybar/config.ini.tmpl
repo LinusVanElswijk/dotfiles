@@ -54,12 +54,13 @@ surface0 = #313244
 base = #1e1e2e
 mantle = #181825
 crust = #11111b
-transparent = #FF00000
+mantle-transparent = #dd181825
 
 [colors]
-background = ${catppuccin.mantle}
+background = ${catppuccin.mantle-transparent}
 background-alt = ${catppuccin.surface0}
 foreground = ${catppuccin.text}
+foreground-dark = ${catppuccin.mantle}
 primary = ${catppuccin.blue}
 secondary = ${catppuccin.mantle}
 alert = ${catppuccin.red}
@@ -152,7 +153,7 @@ content-background = ${left_group.color_1}
 type = custom/text
 content = ${env:MONITOR:unknown monitor}
 content-prefix = "󰍹 "
-content-foreground = ${colors.background}
+content-foreground = ${colors.foreground-dark}
 content-background = ${left_group.color_1}
 
 [module/lsep1]
@@ -282,15 +283,15 @@ mount-0 = /
 fixed-values = true
 spacing = 0
 
-ramp-capacity-0 = "󰄰 "
-ramp-capacity-1 = "󰪞 "
-ramp-capacity-2 = "󰪟 "
-ramp-capacity-3 = "󰪠 "
+ramp-capacity-0 = "󰪥 "
+ramp-capacity-1 = "󰪤 "
+ramp-capacity-2 = "󰪣 "
+ramp-capacity-3 = "󰪢 "
 ramp-capacity-4 = "󰪡 "
-ramp-capacity-5 = "󰪢 "
-ramp-capacity-6 = "󰪣 "
-ramp-capacity-7 = "󰪤 "
-ramp-capacity-8 = "󰪥 "
+ramp-capacity-5 = "󰪠 "
+ramp-capacity-6 = "󰪟 "
+ramp-capacity-7 = "󰪞 "
+ramp-capacity-8 = "󰄰 "
 
 [module/battery]
 type = internal/battery
@@ -424,11 +425,11 @@ content-foreground = ${right_group.color_4}
 type = internal/date
 interval = 1
 
-date = 󰥔 %H:%M
+date = 󰃶 %d  󰥔 %H:%M
 date-alt = 󰃶 %d-%m-%Y  󰥔 %H:%M:%S
 
 label =  %date%
-label-foreground = ${colors.background}
+label-foreground = ${colors.foreground-dark}
 label-background = ${right_group.color_4}
 
 [module/rend]
@@ -490,6 +491,6 @@ modules-right =
 
 [settings]
 screenchange-reload = true
-pseudo-transparency = true 
+pseudo-transparency = false
 
 ; >>>
