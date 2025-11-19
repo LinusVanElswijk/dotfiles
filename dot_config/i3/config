@@ -235,6 +235,8 @@ bindsym $power_mod+XF86AudioMute exec playerctl play-pause
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/brightness_controller.sh down
 
+bindsym $mod+w exec --no-startup-id ~/.config/rofi/scripts/rofi-mpv-control
+
 # notifications mode {{{
 set $notifications_mode "notifications -- [dx]: dismiss [DX]: dismiss all [h]: history-pop"
 mode $notifications_mode {

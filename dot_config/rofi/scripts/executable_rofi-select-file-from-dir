@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+DIR="$1"
+TITLE="$2"
+EXT="$3"
+
+if [ -z "$DIR" ] || [ -z "$TITLE" ]; then
+  echo "Usage: $0 <directory> <menu title> [extension]"
+  exit 1
+fi
+
+if [ ! -d "$DIR" ]; then
+  echo "Directory does not exist: $DIR"
+  exit 1
+fi
+
+if [ -n "$EXT" ]; then
+    FILE_LIST=($(find "$DIR" -maxdepth 1 -type f -name "*.$EXT" | sort))
+else
+    FILE_LIST=($(find "$DIR" -maxdepth 1 -type f | sort))
+fi
+
+# Extract only filenames for display
+FILENAMES=()
+for f in "${FILE_LIST[@]}"; do
+    FILENAMES+=("$(basename "$f")")
+done
+
+CHOICE=$(printf "%s\n" "${FILENAMES[@]}" | rofi -dmenu -i -p "$TITLE")
+
+# Map choice back to full path
+if [ -n "$CHOICE" ]; then
+    for f in "${FILE_LIST[@]}"; do
+        [ "$(basename "$f")" = "$CHOICE" ] && FILE="$f"
+    done
+    echo "$FILE"
+fi
+
+
+
