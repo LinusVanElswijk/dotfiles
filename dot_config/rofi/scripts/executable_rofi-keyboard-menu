@@ -5,6 +5,7 @@ declare -A layouts=(
   ["dvorak (capslock)"]="setxkbmap -layout us -variant dvorak"
   ["qwerty (caps-escape)"]="setxkbmap -layout us -option caps-escape"
   ["qwerty (capslock)"]="setxkbmap -layout us"
+  ["gallium (caps-escape)"]="setxkbmap -layout gallium -option caps-escape"
 )
 
 choice=$(printf "%s\n" "${!layouts[@]}" | rofi -dmenu -p "Select Layout")
