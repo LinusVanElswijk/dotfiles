@@ -1,7 +1,3 @@
-flavors/
-flavors/**
+flavors/*
+plugins/*
 
-plugins/
-plugins/**
-
-package.toml
