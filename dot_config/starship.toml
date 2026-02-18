@@ -1,6 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+command_timeout = 1500  # defaults to 500 ms
+
 format = """\
+(\
+[](mantle)\
+$time\
+[](fg:mantle)   )\
 [](mantle)\
 $shell\
 $username\
@@ -20,7 +26,6 @@ $git_status\
 [](mantle)\
 $status\
 $cmd_duration\
-$time\
 [](fg:mantle))\
 $line_break$sudo$character"""
 
@@ -151,3 +156,11 @@ format = "[$symbol]($style)"
 style = "fg:green bold"
 symbol = "sudo"
 disabled = false
+
+[time]
+disabled = true
+format = "[  $time]($style)"
+style = "fg:overlay1 bg:mantle bold"
+time_format = "%T"
+utc_time_offset = "0"
+time_range = "-"
