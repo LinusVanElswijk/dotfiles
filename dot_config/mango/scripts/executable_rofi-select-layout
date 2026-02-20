@@ -1,0 +1,19 @@
+#!/bin/bash
+
+layouts=(
+  "S  : Scroller"
+  "T  : Tile"
+  "G  : Grid"
+  "M  : Monocle"
+  "K  : Deck"
+  "VS : Vertical Scroller"
+  "VT : Vertical Tile"
+  "CT : Center Tile"
+)
+
+layout=$(printf "%s\n" "${layouts[@]}" | rofi -dmenu -p "Select layout:" -i)
+
+if [[ -n "$layout" ]]; then
+  key=$(echo "$layout" | awk '{print $1}')
+  mmsg -l "$key"
+fi
