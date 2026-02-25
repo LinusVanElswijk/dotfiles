@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-expected_checksum="d71885b58a6f2960842c4d10455b840685528bcef4921b207194a92ff2a32a01"
+expected_checksum="6cd5d3e5b43ef3c81932d79a1a67a19bb1077222c1bb5505fd83b2c671bbba78"
 remote_script=$(wget -qO- https://git.io/papirus-icon-theme-install)
 calculated_checksum=$(echo "$remote_script" | sha256sum | awk '{print $1}')
 
