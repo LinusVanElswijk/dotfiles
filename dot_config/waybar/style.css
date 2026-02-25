@@ -1,0 +1,319 @@
+/* Keyframes */
+
+@keyframes blink-critical {
+	to {
+		/*color: @white;*/
+		color: @critical;
+	}
+}
+
+
+/* Styles */
+
+/* Colors (gruvbox) */
+@define-color black	#282828;
+@define-color red	#cc241d;
+@define-color green	#98971a;
+@define-color yellow	#d79921;
+@define-color blue	#458588;
+@define-color purple	#b16286;
+@define-color aqua	#689d6a;
+@define-color gray	#a89984;
+@define-color brgray	#928374;
+@define-color brred	#fb4934;
+@define-color brgreen	#b8bb26;
+@define-color bryellow	#fabd2f;
+@define-color brblue	#83a598;
+@define-color brpurple	#d3869b;
+@define-color braqua	#8ec07c;
+@define-color white	#ebdbb2;
+@define-color bg2	#504945;
+
+@define-color catppucinn-rosewater #f5e0dc;
+@define-color catppucinn-flamingo #f2cdcd;
+@define-color catppucinn-pink #f5c2e7;
+@define-color catppucinn-mauve #cba6f7;
+@define-color catppucinn-red #f38ba8;
+@define-color catppucinn-maroon #eba0ac;
+@define-color catppucinn-peach #fab387;
+@define-color catppucinn-yellow #f9e2af;
+@define-color catppucinn-green #a6e3a1;
+@define-color catppucinn-teal #94e2d5;
+@define-color catppucinn-sky #89dceb;
+@define-color catppucinn-sapphire #74c7ec;
+@define-color catppucinn-blue #89b4fa;
+@define-color catppucinn-lavender #b4befe;
+@define-color catppucinn-text #cdd6f4;
+@define-color catppucinn-subtext1 #bac2de;
+@define-color catppucinn-subtext0 #a6adc8;
+@define-color catppucinn-overlay2 #9399b2;
+@define-color catppucinn-overlay1 #7f849c;
+@define-color catppucinn-overlay0 #6c7086;
+@define-color catppucinn-surface2 #585b70;
+@define-color catppucinn-surface1 #45475a;
+@define-color catppucinn-surface0 #313244;
+@define-color catppucinn-base #1e1e2e;
+@define-color catppucinn-mantle #181825;
+@define-color catppucinn-crust #11111b;
+
+@define-color text-light @catppucinn-text;
+@define-color text-dark @catppucinn-base;
+@define-color module-surface @catppucinn-surface0;
+@define-color module-keyboard @catppucinn-green;
+@define-color background @catppucinn-crust;
+@define-color warning 	@catppucinn-peach;
+@define-color critical	@catppucinn-red;
+@define-color unfocused	@catppucinn-surface0;
+@define-color focused	@catppucinn-blue;
+@define-color inactive	@catppucinn-lavender;
+@define-color sound	@catppucinn-peach;
+@define-color network	@catppucinn-yellow;
+@define-color memory	@catppucinn-mauve;
+@define-color cpu	@catppucinn-mauve;
+@define-color temp	@catppucinn-red;
+@define-color layout	@catppucinn-text;
+@define-color battery	@catppucinn-sky;
+@define-color date-time	@catppucinn-blue;
+@define-color tray	@catppucinn-crust;
+
+/* Reset all styles */
+* {
+	border: none;
+	border-radius: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	box-shadow: none;
+	text-shadow: none;
+	icon-shadow: none;
+}
+
+/* The whole bar */
+#waybar {
+	background: @background;
+  color: @text-light;
+	font-family: IosevkaTerm Nerd Font;
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+/* Each module */
+#battery,
+#clock,
+#cpu,
+#language,
+#memory,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#backlight,
+#idle_inhibitor,
+#custom-disk,
+#custom-keyboard,
+#user,
+#mpris {
+	padding-left: 6pt;
+	padding-right: 6pt;
+}
+
+#memory,
+#custom-disk {
+	padding-left: 0;
+}
+
+#cpu,
+#memory {
+	padding-right: 0;
+}
+
+/* Each critical module */
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical.discharging {
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: blink-critical;
+	animation-duration: 1s;
+}
+
+/* Each warning */
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning.discharging {
+	color: @warning;
+}
+
+/* And now modules themselves in their respective order */
+
+/* Workspaces stuff */
+#workspaces button {
+	/*font-weight: bold;*/
+	padding-left: 2pt;
+	padding-right: 2pt;
+	color: @text-light;
+	background: @unfocused;
+}
+
+/* Inactive (on unfocused output) */
+#workspaces button.visible {
+	color: @text-light;
+	background: @inactive;
+}
+
+/* Active (on focused output) */
+#workspaces button.focused {
+	color: @text-dark;
+	background: @focused;
+}
+
+#workspaces button.active {
+	color: @text-dark;
+	background: @catppucinn-blue;
+}
+
+/* Contains an urgent window */
+#workspaces button.urgent {
+	color: @text-dark;
+	background: @warning;
+}
+
+/* Style when cursor is on the button */
+#workspaces button:hover {
+	background: @catppucinn-base;
+	color: @text-light;
+}
+
+#window {
+	margin-right: 35pt;
+	margin-left: 35pt;
+}
+
+#custom-keyboard {
+	background: @background;
+	color: @module-keyboard;
+}
+
+#pulseaudio {
+	background: @module-surface;
+	color: @date-time;
+}
+
+#network {
+	background: @module-surface;
+	color: @date-time;
+}
+
+#memory {
+	background: @background;
+	color: @cpu;
+}
+
+#cpu {
+	background: @background;
+	color: @cpu;
+}
+
+#custom-disk {
+	background: @background;
+	color: @cpu;
+}
+
+#temperature {
+	background: @module-surface;
+	color: @text-light;
+}
+
+#language {
+	background: @background;
+	color: @text-light;
+}
+
+#battery {
+	background: @background;
+	color: @battery;
+}
+
+#tray {
+	background: @background;
+}
+
+#clock.date {
+	background: @date-time;
+	color: @text-dark;
+}
+
+#clock.time {
+	background: @date-time;
+	color: @text-dark;
+}
+
+#custom-arrow0 {
+	font-size: 12pt;
+	color: @tray;
+	background: @date-time;
+}
+
+#custom-arrow1 {
+	font-size: 12pt;
+	color: @text-dark;
+	background: @date-time;
+}
+
+#custom-arrow2 {
+	font-size: 12pt;
+	color: @date-time;
+	background: @module-surface;
+}
+
+#custom-arrow3 {
+	font-size: 12pt;
+	color: @text-dark;
+	background: @module-surface;
+}
+
+#custom-arrow4 {
+	font-size: 12pt;
+	color: @module-surface;
+	background: @background;
+}
+
+#custom-arrow5 {
+	font-size: 12pt;
+	color: @text-light;
+	background: @background;
+}
+
+#custom-arrow6 {
+	font-size: 12pt;
+	color: @text-light;
+	background: @background;
+}
+
+#custom-arrow7 {
+	font-size: 12pt;
+	color: @memory;
+	background: @background;
+}
+
+#custom-arrow8 {
+	font-size: 12pt;
+	color: @network;
+	background: @sound;
+}
+
+#custom-arrow9 {
+	font-size: 12pt;
+	color: @sound;
+	background: transparent;
+}
+
+#custom-arrow10 {
+	font-size: 11pt;
+	color: @unfocused;
+	background: transparent;
+}

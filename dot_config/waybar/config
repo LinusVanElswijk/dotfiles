@@ -1,0 +1,226 @@
+{ 
+  // https://github.com/mxkrsv/dotfiles-old/tree/42e615c5e0f09e3d4dfef63363cec134ea6410a9/.config/waybar
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+    "ext/workspaces",
+		"custom/arrow10"
+	],
+
+	"modules-right": [
+		"custom/keyboard",
+		"custom/arrow6",
+		"cpu",
+		"memory",
+    "custom/disk",
+		"custom/arrow5",
+		"battery",
+		"custom/arrow4",
+		"network",
+		"custom/arrow3",
+		"pulseaudio",
+		"custom/arrow2",
+		"clock#date",
+		"custom/arrow1",
+		"clock#time"
+	],
+
+	"modules-center": [
+		"tray"
+	],
+
+	// Modules
+
+	"battery": {
+		"interval": 10,
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format-time": "{H}:{M:02}",
+		"format": "{icon} {capacity}% ({time})",
+		"format-charging": " {capacity}% ({time})",
+		"format-charging-full": " {capacity}%",
+		"format-full": "{icon} {capacity}%",
+		"format-alt": "{icon} {power}W",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"tooltip": false
+	},
+
+	"clock#time": {
+		"interval": 10,
+		"format": "  {:%H:%M}",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 20,
+		"format": "󰃶 {:%e}",
+		"tooltip": true,
+		"tooltip-format": "{:%e %B %Y}"
+	},
+
+	"custom/keyboard": {
+    "interval": 30,
+		"format": " {text}",
+    "exec": "localectl status | grep Layout | cut -d: -f2",
+		"tooltip": false,
+    "tooltip-format": "{text}"
+	},
+
+	"cpu": {
+		"interval": 5,
+		"tooltip": true,
+		"format": "{icon}",
+    "tooltip-format": "  {usage}%",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		},
+    "format-icons": ["󰄰 ", "󰪞 ", "󰪟 ", "󰪠 ", "󰪡 ", "󰪢 ", "󰪣 ", "󰪤 ", "󰪥 " ]
+	},
+
+	"memory": {
+		"interval": 5,
+    "format": "{icon}",
+		"tooltip-format": "  {used:0.1f}G/{total:0.1f}G",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		},
+		"tooltip": true,
+    "format-icons": ["󰄰 ", "󰪞 ", "󰪟 ", "󰪠 ", "󰪡 ", "󰪢 ", "󰪣 ", "󰪤 ", "󰪥 " ]
+	},
+
+	"custom/disk": {
+    "interval": 30,
+		"format": "{icon}",
+    "exec": "~/.config/waybar/scripts/disk_usage.sh",
+		"tooltip": true,
+    "tooltip-format": "{text}",
+		"states": {
+			"warning": 70,
+			"critical": 80
+		},
+    "return-type": "json",
+    "format-icons": ["󰄰 ", "󰪞 ", "󰪟 ", "󰪠 ", "󰪡 ", "󰪢 ", "󰪣 ", "󰪤 ", "󰪥 " ]
+	},
+
+	"network": {
+		"interval": 5,
+		"format-wifi": " ",
+		"format-ethernet": "  {ifname}",
+		"format-disconnected": "No connection",
+		"format-alt": "  {ipaddr}/{cidr}",
+		"tooltip": true
+	},
+
+  "ext/workspaces": {
+    "format": "{icon}",
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
+  },
+
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-bluetooth": "{icon} {volume}%",
+		"format-muted": "",
+		"format-icons": {
+			"headphone": " ",
+			"hands-free": " ",
+			"headset": " ",
+			"phone": " ",
+			"portable": " ",
+			"car": " ",
+			"default": [" ", " "]
+		},
+		"scroll-step": 1,
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"tooltip": false
+	},
+
+	"temperature": {
+		"critical-threshold": 90,
+		"interval": 5,
+		"format": "{icon} {temperatureC}°",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"tooltip": false
+	},
+
+	"tray": {
+		"icon-size": 18
+		//"spacing": 10
+	},
+
+	"custom/arrow0": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow4": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow5": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow6": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow7": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow8": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow9": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow10": {
+		"format": "",
+		"tooltip": false
+	}
+}
+
+// vi:ft=jsonc
