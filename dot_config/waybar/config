@@ -39,19 +39,24 @@
 			"critical": 15
 		},
 		"format-time": "{H}:{M:02}",
-		"format": "{icon} {capacity}% ({time})",
-		"format-charging": " {capacity}% ({time})",
+		"format": "{icon} ({time})",
+		"format-charging": " {capacity}%",
 		"format-charging-full": " {capacity}%",
-		"format-full": "{icon} {capacity}%",
+		"format-full": "{icon} ({time})%",
 		"format-alt": "{icon} {power}W",
 		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
+			"󰂎",
+			"󰁺",
+			"󰁻",
+			"󰁼",
+			"󰁽",
+			"󰁿",
+			"󰂀",
+			"󰂁",
+			"󰂂",
+			"󰁹"
 		],
-		"tooltip": false
+		"tooltip": true
 	},
 
 	"clock#time": {
