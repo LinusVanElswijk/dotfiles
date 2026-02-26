@@ -80,7 +80,7 @@
 	"custom/keyboard": {
     "interval": 30,
 		"format": " {text}",
-    "exec": "localectl status | grep Layout | cut -d: -f2",
+    "exec": "~/.config/waybar/scripts/current_kb_layout.sh",
 		"tooltip": false,
     "tooltip-format": "{text}"
 	},
