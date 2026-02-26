@@ -127,7 +127,7 @@
 		"interval": 5,
 		"format-wifi": "{icon}",
 		"format-ethernet": "  {ifname}",
-		"format-disconnected": "No connection",
+		"format-disconnected": "󰤮 ",
 		"format-alt": "  {ipaddr}/{cidr}",
 		"tooltip": true,
 		"tooltip-format": "{ifname}",
