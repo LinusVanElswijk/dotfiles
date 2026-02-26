@@ -39,11 +39,11 @@
 			"critical": 15
 		},
 		"format-time": "{H}:{M:02}",
-		"format": "{icon} {time}",
-		"format-charging": " {icon} {capacity}%",
-		"format-charging-full": " {icon} {capacity}%",
+		"format": "{icon} {time}",
+		"format-charging": "{icon} {capacity}%",
+		"format-charging-full": "{icon} {capacity}%",
 		"format-full": "{icon}",
-		"format-alt": "{icon} {power:.2}W",
+		"format-alt": " {power:.2}W",
 		"format-icons": [
 			"󰂎",
 			"󰁺",
@@ -56,7 +56,13 @@
 			"󰂂",
 			"󰁹"
 		],
-		"tooltip": true
+		"tooltip": true,
+		"format-tooltip": "{icon}{capacity}% ({status} {time}),  {health}%",
+		"events": {
+			"on-discharging-warning": "notify-send -u normal 'Low Battery'",
+			"on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+			"on-charging-100": "notify-send -u normal 'Battery Full!'"
+		}
 	},
 
 	"clock#time": {
