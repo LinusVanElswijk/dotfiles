@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=kitty
+GenericName=Terminal emulator
+Comment=Fast, feature-rich, GPU based terminal
+TryExec=/home/linus/.local/kitty.app/bin/kitty
+StartupNotify=true
+Exec=/home/linus/.local/kitty.app/bin/kitty
+Icon=/home/linus/.local/share/icons/kitty_alternative_icon.png
+Categories=System;TerminalEmulator;
+Terminal=false
+PrefersNonDefaultGPU=false

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=System Monitor
+Comment=btop system monitor
+Categories=System
+
+Exec=/home/linus/bin/kitty --class "btop" --override background_opacity=0.6 --override tab_bar_min_tabs=2 --override confirm_os_window_close=0 -e /usr/bin/btop
+Icon=/home/linus/.local/share/icons/kitty_alternative_icon.png
+
+StartupNotify=true

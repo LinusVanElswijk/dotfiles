@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Cava
+Comment=cava
+Categories=System
+
+Exec=/home/linus/bin/kitty --override background_opacity=0.0 --class cava --override tab_bar_min_tabs=2 --override confirm_os_window_close=0 --override font_size=12 -e /usr/bin/cava
+Icon=/home/linus/.local/share/icons/kitty_alternative_icon.png
+
+StartupNotify=true
