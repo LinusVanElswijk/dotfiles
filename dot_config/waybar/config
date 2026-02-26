@@ -66,7 +66,7 @@
 
 	"clock#time": {
 		"interval": 10,
-		"format": "  {:%H:%M}",
+		"format": " {:%H:%M}",
 		"tooltip": false
 	},
 
@@ -125,11 +125,16 @@
 
 	"network": {
 		"interval": 5,
-		"format-wifi": " ",
+		"format-wifi": "{icon}",
 		"format-ethernet": "  {ifname}",
 		"format-disconnected": "No connection",
 		"format-alt": "  {ipaddr}/{cidr}",
-		"tooltip": true
+		"tooltip": true,
+		"tooltip-format": "{ifname}",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%)",
+		"tooltip-format-ethernet": "Wired Connection",
+		"tooltip-format-disconnected": "Disconnected",
+	        "format-icons": ["󰤫 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "]
 	},
 
   "ext/workspaces": {
