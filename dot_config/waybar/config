@@ -39,10 +39,10 @@
 			"critical": 15
 		},
 		"format-time": "{H}:{M:02}",
-		"format": "{icon} ({time})",
-		"format-charging": " {capacity}%",
-		"format-charging-full": " {capacity}%",
-		"format-full": "{icon} ({time})%",
+		"format": "{icon} {time}",
+		"format-charging": " {icon} {capacity}%",
+		"format-charging-full": " {icon} {capacity}%",
+		"format-full": "{icon}",
 		"format-alt": "{icon} {power}W",
 		"format-icons": [
 			"󰂎",
