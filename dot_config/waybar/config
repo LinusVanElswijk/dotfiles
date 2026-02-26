@@ -1,4 +1,4 @@
-{ 
+{
   // https://github.com/mxkrsv/dotfiles-old/tree/42e615c5e0f09e3d4dfef63363cec134ea6410a9/.config/waybar
 	"layer": "top",
 	"position": "top",
@@ -57,7 +57,7 @@
 			"󰁹"
 		],
 		"tooltip": true,
-		"format-tooltip": "{icon}{capacity}% ({status} {time}),  {health}%",
+		"tooltip-format": "{icon}{capacity}% ({status} {time}),  {health}%",
 		"events": {
 			"on-discharging-warning": "notify-send -u normal 'Low Battery'",
 			"on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
