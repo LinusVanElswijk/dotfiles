@@ -43,7 +43,7 @@
 		"format-charging": " {icon} {capacity}%",
 		"format-charging-full": " {icon} {capacity}%",
 		"format-full": "{icon}",
-		"format-alt": "{icon} {power}W",
+		"format-alt": "{icon} {power:.2}W",
 		"format-icons": [
 			"󰂎",
 			"󰁺",
