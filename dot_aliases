@@ -1,0 +1,24 @@
+# The syntax `alias NAME=DEFITION` works for both bash and fish
+
+# modern tools
+alias truels=/bin/ls
+alias truell="/bin/ls --long"
+
+alias ls="eza --icons --hyperlink"
+alias ll="eza --long --icons --hyperlink"
+
+alias tree="eza --tree --icons -L2"
+alias t1="tree -L1"
+alias t2="tree -L2"
+alias t3="tree -L3"
+alias t4="tree -L4"
+alias t5="tree -L5"
+
+# other
+alias bearcmake="nice -15 ionice -c2 -n7 bear -- cmake"
+
+# shortcuts
+alias chz=chezmoi
+alias lgit=lazygit
+alias nv=nvim
+
