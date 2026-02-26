@@ -78,7 +78,7 @@
 	},
 
 	"custom/keyboard": {
-    "interval": 30,
+    "interval": 5,
 		"format": " {text}",
     "exec": "~/.config/waybar/scripts/current_kb_layout.sh",
 		"tooltip": false,
