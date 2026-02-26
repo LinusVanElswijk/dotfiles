@@ -1,0 +1,15 @@
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
+gui:
+  nerdFontsVersion: "3"
+customCommands:
+  - key: '<c-p>'
+    context: 'localBranches'
+    command: "git push {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
+    loadingText: 'Pushing (skip CI)...'
+  - key: '<c-P>'
+    context: 'localBranches'
+    command: "git push --force {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
+    loadingText: 'Pushing (skip CI)...'
