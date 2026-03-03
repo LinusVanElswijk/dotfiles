@@ -22,3 +22,6 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+
+# Created by `pipx` on 2026-03-01 23:02:46
+set PATH $PATH /home/linus/.local/bin
