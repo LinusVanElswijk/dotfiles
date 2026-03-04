@@ -1,0 +1,41 @@
+output "LG Display 0x0769 0x0000075F" {
+  alias $INTERNAL
+  mode 1920x1080
+  position 3826,840
+  scale 1
+}
+
+output "Lenovo Group Limited LEN T24i-10 VNA2RK6A" {
+  alias $PEP_OFFICE_LEFT
+  mode 1920x1080
+  position 0,0
+  scale 1
+  transform 90
+}
+
+output "HP Inc. HP ENVY 27s 6CM72218WX" {
+  alias $PEP_OFFICE_CENTER
+  mode 3840x2160
+  position 1080,185
+  scale 1.4
+}
+
+profile pep_office {
+  output $PEP_OFFICE_CENTER enable
+  output $PEP_OFFICE_LEFT enable
+  output $INTERNAL enable
+}
+
+profile pep_office_just_left {
+  output $PEP_OFFICE_LEFT enable
+  output $INTERNAL enable
+}
+
+profile pep_office_just_center {
+  output $PEP_OFFICE_CENTER enable
+  output $INTERNAL enable
+}
+
+profile on_the_go {
+  output $INTERNAL enable
+}
