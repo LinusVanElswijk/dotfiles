@@ -14,14 +14,25 @@ if type -q starship
     starship init fish | source
 end
 
-function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+if type -q zoxide
+    zoxide init fish --cmd e | source
 end
 
-# Created by `pipx` on 2026-03-01 23:02:46
-set PATH $PATH /home/linus/.local/bin
+if type -q yazi
+  function y
+      set tmp (mktemp -t "yazi-cwd.XXXXXX")
+      yazi $argv --cwd-file="$tmp"
+      if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+          builtin cd -- "$cwd"
+      end
+      rm -f -- "$tmp"
+  end
+end
+
+if test -e /home/linus/go/bin
+  set PATH $PATH /home/linus/go/bin
+end
+
+if test -e /home/linus/.local/bin
+  set PATH $PATH /home/linus/.local/bin
+end
