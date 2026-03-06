@@ -54,6 +54,9 @@
         "hideOnOverview": false,
         "marginHorizontal": 4,
         "marginVertical": 4,
+        "middleClickAction": "none",
+        "middleClickCommand": "",
+        "middleClickFollowMouse": false,
         "monitors": [
         ],
         "mouseWheelAction": "none",
@@ -61,6 +64,9 @@
         "outerCorners": false,
         "position": "top",
         "reverseScroll": false,
+        "rightClickAction": "controlCenter",
+        "rightClickCommand": "",
+        "rightClickFollowMouse": true,
         "screenOverrides": [
         ],
         "showCapsule": false,
@@ -92,32 +98,20 @@
             ],
             "left": [
                 {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "primary",
-                    "customIconPath": "",
-                    "enableColorization": true,
-                    "icon": "power",
-                    "id": "ControlCenter",
-                    "useDistroLogo": false
-                },
-                {
                     "deviceNativePath": "__default__",
                     "displayMode": "graphic-clean",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
-                },
-                {
-                    "iconColor": "none",
-                    "id": "PowerProfile"
+                    "showPowerProfiles": true
                 },
                 {
                     "compactMode": true,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
+                    "showCpuCores": false,
                     "showCpuFreq": false,
                     "showCpuTemp": true,
                     "showCpuUsage": true,
@@ -174,16 +168,8 @@
                     "id": "plugin:privacy-indicator"
                 },
                 {
-                    "hideWhenZero": false,
-                    "hideWhenZeroUnread": false,
-                    "iconColor": "none",
-                    "id": "NotificationHistory",
-                    "showUnreadBadge": true,
-                    "unreadBadgeColor": "tertiary"
-                },
-                {
                     "id": "Spacer",
-                    "width": 15
+                    "width": 8
                 },
                 {
                     "displayMode": "onhover",
@@ -209,10 +195,9 @@
                     "visualizerType": "mirrored"
                 },
                 {
-                    "applyToAllMonitors": false,
                     "displayMode": "onhover",
                     "iconColor": "none",
-                    "id": "Brightness",
+                    "id": "Bluetooth",
                     "textColor": "none"
                 },
                 {
@@ -230,30 +215,23 @@
                     "id": "plugin:network-manager-vpn"
                 },
                 {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Bluetooth",
-                    "textColor": "none"
+                    "id": "Spacer",
+                    "width": 8
                 },
                 {
-                    "defaultSettings": {
-                        "activeBackend": "qt6-multimedia",
-                        "automationMode": "random",
-                        "automationTime": 300,
-                        "fillMode": "fit",
-                        "mpvSocket": "/tmp/mpv-socket",
-                        "profile": "default",
-                        "volume": 1,
-                        "wallpapersFolder": "~/Pictures/Wallpapers"
-                    },
-                    "id": "plugin:video-wallpaper"
+                    "hideWhenZero": false,
+                    "hideWhenZeroUnread": false,
+                    "iconColor": "none",
+                    "id": "NotificationHistory",
+                    "showUnreadBadge": true,
+                    "unreadBadgeColor": "tertiary"
                 },
                 {
                     "id": "Spacer",
-                    "width": 15
+                    "width": 5
                 },
                 {
-                    "clockColor": "primary",
+                    "clockColor": "none",
                     "customFont": "IosevkaTerm Nerd Font Propo",
                     "formatHorizontal": "󰃶 MM   HH:mm",
                     "formatVertical": "HH mm - dd MM",
@@ -325,7 +303,6 @@
             }
         ],
         "diskPath": "/",
-        "openAtMouseOnBarRightClick": true,
         "position": "close_to_bar_button",
         "shortcuts": {
             "left": [
@@ -510,6 +487,7 @@
     },
     "network": {
         "airplaneModeEnabled": false,
+        "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
@@ -637,7 +615,7 @@
         "showHeader": true,
         "showKeybinds": true
     },
-    "settingsVersion": 54,
+    "settingsVersion": 55,
     "systemMonitor": {
         "batteryCriticalThreshold": 5,
         "batteryWarningThreshold": 20,
