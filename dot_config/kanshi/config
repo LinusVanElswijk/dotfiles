@@ -5,6 +5,13 @@ output "LG Display 0x0769 0x0000075F" {
   scale 1
 }
 
+output "LG Electronics LG ULTRAWIDE 0x00057102" {
+  alias $HOME_OFFICE_UW
+  mode 3440x1440
+  position 1920,0
+  scale 1
+}
+
 output "Lenovo Group Limited LEN T24i-10 VNA2RK6A" {
   alias $PEP_OFFICE_LEFT
   mode 1920x1080
@@ -18,6 +25,11 @@ output "HP Inc. HP ENVY 27s 6CM72218WX" {
   mode 3840x2160
   position 1080,185
   scale 1.4
+}
+
+profile home_office {
+  output $HOME_OFFICE_UW enable
+  output $INTERNAL enable
 }
 
 profile pep_office {
