@@ -1,14 +1,13 @@
+output "LG Electronics LG ULTRAWIDE 0x00057102" {
+  alias $HOME_OFFICE_UW
+  mode 3440x1440
+  scale 1
+}
+
 output "LG Display 0x0769 0x0000075F" {
   alias $INTERNAL
   mode 1920x1080
   position 3826,840
-  scale 1
-}
-
-output "LG Electronics LG ULTRAWIDE 0x00057102" {
-  alias $HOME_OFFICE_UW
-  mode 3440x1440
-  position 1920,0
   scale 1
 }
 
@@ -28,8 +27,8 @@ output "HP Inc. HP ENVY 27s 6CM72218WX" {
 }
 
 profile home_office {
-  output $HOME_OFFICE_UW enable
-  output $INTERNAL enable
+  output $HOME_OFFICE_UW enable position 1920,0
+  output $INTERNAL enable position 0,732
 }
 
 profile pep_office {
