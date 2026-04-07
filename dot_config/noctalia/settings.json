@@ -466,6 +466,7 @@
     },
     "location": {
         "analogClockInCalendar": false,
+        "autoLocate": false,
         "firstDayOfWeek": 1,
         "hideWeatherCityName": true,
         "hideWeatherTimezone": false,
@@ -476,7 +477,8 @@
         "use12hourFormat": false,
         "useFahrenheit": false,
         "weatherEnabled": true,
-        "weatherShowEffects": false
+        "weatherShowEffects": false,
+        "weatherTaliaMascotAlways": false
     },
     "network": {
         "bluetoothAutoConnect": true,
