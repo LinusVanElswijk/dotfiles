@@ -224,6 +224,9 @@
                     "id": "Clock",
                     "tooltipFormat": "dddd, dd.MM.yyyy, HH:mm",
                     "useCustomFont": true
+                },
+                {
+                    "id": "plugin:keybind-cheatsheet"
                 }
             ]
         }
