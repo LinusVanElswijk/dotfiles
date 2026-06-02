@@ -10,7 +10,7 @@ customCommands:
     context: 'localBranches'
     command: "git push {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
     loadingText: 'Pushing (skip CI)...'
-  - key: '<ctrl+P>'
+  - key: '<ctrl+shift+p>'
     context: 'localBranches'
     command: "git push --force {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
     loadingText: 'Pushing (skip CI)...'
