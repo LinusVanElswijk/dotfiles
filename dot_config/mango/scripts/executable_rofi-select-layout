@@ -1,19 +1,41 @@
 #!/bin/bash
 
 layouts=(
-  "S  : Scroller"
   "T  : Tile"
-  "G  : Grid"
+  "S  : Scroller"
   "M  : Monocle"
+  "G  : Grid"
   "K  : Deck"
-  "VS : Vertical Scroller"
-  "VT : Vertical Tile"
   "CT : Center Tile"
+  "VT : Vertical Tile"
+  "RT : Right Tile"
+  "VS : Vertical Scroller"
+  "VG : Vertical Grid"
+  "VK : Vertical Deck"
+  "D  : Dwindle"
+  "F  : Fair"
+  "VF : Vertical Fair"
 )
+
+declare -A map
+map["T"]="tile"
+map["S"]="scroller"
+map["M"]="monocle"
+map["G"]="grid"
+map["K"]="deck"
+map["CT"]="center_tile"
+map["VT"]="vertical_tile"
+map["RT"]="right_tile"
+map["VS"]="vertical_scroller"
+map["VG"]="vertical_grid"
+map["VK"]="vertical_deck"
+map["D"]="dwindle"
+map["F"]="fair"
+map["VF"]="vertical_fair"
 
 layout=$(printf "%s\n" "${layouts[@]}" | rofi -dmenu -p "Select layout:" -i)
 
 if [[ -n "$layout" ]]; then
   key=$(echo "$layout" | awk '{print $1}')
-  mmsg -l "$key"
+  mmsg dispatch "setlayout,${map[$key]}"
 fi
