@@ -6,11 +6,11 @@ gui:
   skipDiscardChangeWarning: true
   nerdFontsVersion: "3"
 customCommands:
-  - key: '<c-p>'
+  - key: '<ctrl+p>'
     context: 'localBranches'
     command: "git push {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
     loadingText: 'Pushing (skip CI)...'
-  - key: '<c-P>'
+  - key: '<ctrl+P>'
     context: 'localBranches'
     command: "git push --force {{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}} -o ci.skip"
     loadingText: 'Pushing (skip CI)...'
