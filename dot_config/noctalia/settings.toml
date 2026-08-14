@@ -1,0 +1,181 @@
+[accessibility]
+ui_scale = 1.1000000089406967
+
+[bar.default]
+capsule_thickness = 0.99999998137354851
+center = [ "workspaces" ]
+concave_edge_corners = false
+end = [
+    "privacy",
+    "volume",
+    "spacer_media",
+    "media",
+    "spacer_bluetooth",
+    "bluetooth",
+    "network",
+    "spacer_notifications",
+    "notifications",
+    "spacer_clock",
+    "clock"
+]
+font_weight = 700
+margin_ends = 0
+radius = 0
+start = [ "battery", "cpu", "temp", "ram", "sysmon", "spacer_tray", "tray" ]
+thickness = 30
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1720.0
+    cy = 1258.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugins]
+enabled = [ "blackbartblues/keymap" ]
+
+[shell]
+corner_radius_scale = 0.7500000111758709
+font_family = "IosevkaTerm NF"
+
+    [shell.animation]
+    speed = 1.8000000268220901
+
+[theme]
+community_palette = "Catppuccin Mocha Blue"
+source = "community"
+
+[wallpaper.default]
+path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+
+[wallpaper.last]
+path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+
+[widget.battery]
+color = "primary"
+display_mode = "graphic"
+scale = 0.85000000000000009
+show_label = false
+
+[widget.clock]
+format = "{:%d} - {:%H:%M}"
+tooltip_format = "{:%A}, {:%d.%m.%Y}, {:%H:%M}"
+
+[widget.cpu]
+color = "primary"
+icon_color = "on_surface"
+show_value = false
+
+[widget.media]
+hide_when_no_media = true
+max_length = 130
+title_scroll = "always"
+
+[widget.network]
+show_label = false
+show_vpn_label = true
+vpn_status = "both"
+
+[widget.privacy]
+active_color = "error"
+hide_inactive = true
+
+[widget.ram]
+color = "primary"
+icon_color = "on_surface"
+show_value = false
+
+[widget.spacer_bluetooth]
+length = 12
+type = "spacer"
+
+[widget.spacer_clock]
+length = 16
+type = "spacer"
+
+[widget.spacer_media]
+length = 8
+type = "spacer"
+
+[widget.spacer_notifications]
+length = 16
+type = "spacer"
+
+[widget.spacer_tray]
+length = 16
+type = "spacer"
+
+[widget.sysmon]
+color = "primary"
+icon_color = "on_surface"
+show_value = false
+stat = "disk_used"
+
+[widget.temp]
+color = "primary"
+icon_color = "on_surface"
+show_value = false
+
+[widget.volume]
+mute_color = "on_surface"
+show_label = false
+
+[widget.workspaces]
+hide_when_empty = true
+
+    [widget.workspaces.actions]
+    scroll_down = "none"
+    scroll_up = "none"
