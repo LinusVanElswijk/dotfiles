@@ -224,9 +224,6 @@
                     "id": "Clock",
                     "tooltipFormat": "dddd, dd.MM.yyyy, HH:mm",
                     "useCustomFont": true
-                },
-                {
-                    "id": "plugin:keybind-cheatsheet"
                 }
             ]
         }
@@ -350,7 +347,7 @@
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
         "dockType": "floating",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 1,
         "groupApps": false,
         "groupClickAction": "cycle",
